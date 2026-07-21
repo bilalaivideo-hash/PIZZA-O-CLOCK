@@ -289,11 +289,46 @@
     padding:5px 11px; border-radius:999px; z-index:2; animation:tick 2.4s ease-in-out infinite;
   }
   @keyframes tick{ 0%,100%{transform:rotate(-3deg);} 50%{transform:rotate(3deg);} }
+  .m-card{ display:flex; flex-direction:column;}
   .m-card h3{ font-size:18px; margin-bottom:6px;}
   .m-card p{ font-size:13.5px; color:var(--muted); margin-bottom:14px; min-height:38px;}
   .m-foot{ display:flex; align-items:center; justify-content:space-between; margin-top:auto; }
   .m-price{ font-family:var(--font-head); font-weight:700; color:var(--red-dark); font-size:15px;}
   .m-cat-tag{ font-size:11.5px; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; font-weight:600;}
+
+  /* ---- Price table (pizza / multi-variant items) ---- */
+  .pg-items{ font-size:13px; color:var(--muted); margin-bottom:12px; min-height:auto; line-height:1.5;}
+  .pg-note{ font-size:12px; color:var(--red-dark); font-weight:600; margin-top:10px; margin-bottom:0;}
+  .price-table{ display:flex; flex-direction:column; gap:6px; border-top:1px dashed var(--line); padding-top:12px; margin-top:auto;}
+  .price-table.small{ margin-top:8px; padding-top:10px; border-top:1px dashed var(--line);}
+  .pt-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; font-size:13px;}
+  .pt-row span{ color:var(--ink-soft); font-weight:500;}
+  .pt-row b{ color:var(--red-dark); font-family:var(--font-head); font-weight:700; font-size:14px; white-space:nowrap;}
+
+  /* ---- Sauces & extra toppings note ---- */
+  .extras-note{
+    margin-top:44px; background:var(--cream); border:1px solid var(--line); border-radius:var(--radius);
+    padding:28px 30px; display:grid; grid-template-columns:1fr 1fr; gap:24px 40px;
+  }
+  .extras-col h4{ font-size:14.5px; margin-bottom:12px; color:var(--ink);}
+  .extras-row{ display:flex; justify-content:space-between; gap:10px; font-size:13.5px; padding:6px 0; border-bottom:1px dashed var(--line);}
+  .extras-row span{ color:var(--ink-soft);}
+  .extras-row b{ color:var(--red-dark); font-family:var(--font-head); font-weight:700; white-space:nowrap;}
+  .extras-fine{ grid-column:1/-1; font-size:11.5px; color:var(--muted); margin-top:6px;}
+
+  /* ---- Deals: subheads + tag + price ---- */
+  .deals-subhead{
+    color:#fff; font-size:20px; font-weight:700; margin:36px 0 20px; display:flex; align-items:center; gap:10px; position:relative; z-index:1;
+  }
+  .deals-subhead:first-of-type{ margin-top:0;}
+  .deals-subnote{ font-size:12px; font-weight:600; color:var(--yellow); background:rgba(255,193,7,0.12); border:1px solid rgba(255,193,7,0.35); padding:4px 12px; border-radius:999px; text-transform:none; letter-spacing:0;}
+  .dot-live{ width:9px; height:9px; border-radius:50%; background:var(--red); animation:pulse 1.6s infinite; flex-shrink:0;}
+  .deals-grid-5{ grid-template-columns:repeat(5,1fr);}
+  .deal-tag{
+    display:inline-block; font-size:10.5px; font-weight:800; letter-spacing:.04em; text-transform:uppercase;
+    color:var(--ink); background:var(--yellow); padding:4px 10px; border-radius:999px; margin-bottom:12px;
+  }
+  .deal-price{ font-family:var(--font-head); font-weight:800; font-size:20px; color:var(--yellow); margin-top:14px;}
 
   /* ===== DEALS ===== */
   .deals{ background:var(--ink); color:#fff; position:relative; overflow:hidden;}
@@ -303,7 +338,8 @@
   }
   .deals .sec-head p{ color:rgba(255,255,255,0.6);}
   .deals .sec-head h2{ color:#fff;}
-  .deals-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; position:relative; z-index:1;}
+  .deals-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; position:relative; z-index:1;}
+  .deals-grid-5{ grid-template-columns:repeat(5,1fr);}
   .d-card{
     background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:var(--radius);
     padding:28px 22px; text-align:center; transition:transform .35s var(--ease), background .3s ease, border-color .3s ease;
@@ -452,6 +488,8 @@
     .highlights .wrap{ grid-template-columns:repeat(3,1fr); gap:22px;}
     .h-item{ border-right:none;}
     .menu-grid, .deals-grid, .rev-grid{ grid-template-columns:repeat(2,1fr);}
+    .deals-grid-5{ grid-template-columns:repeat(2,1fr);}
+    .extras-note{ grid-template-columns:1fr; gap:20px;}
     .price-rows{ grid-template-columns:1fr;}
     .midnight-grid{ grid-template-columns:repeat(2,1fr);}
     .loc-grid{ grid-template-columns:1fr;}
@@ -465,6 +503,7 @@
     .sec-head h2{ font-size:26px;}
     section{ padding:56px 0;}
     .menu-grid, .deals-grid, .rev-grid, .highlights .wrap{ grid-template-columns:1fr;}
+    .deals-grid-5{ grid-template-columns:1fr;}
     .midnight-grid{ grid-template-columns:1fr;}
     .foot-links{ gap:34px;}
     .foot-top{ flex-direction:column;}
@@ -596,204 +635,197 @@
 <section class="menu" id="menu">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Fan favourites</span>
-      <h2>Signature menu</h2>
-      <p>The dishes Pizza O'Clock is known for — signature square pizza, loaded sides and more.</p>
+      <span class="eyebrow">The catalogue</span>
+      <h2>Our menu</h2>
+      <p>Signature pizzas, appetizers, burgers and more — straight from the official Pizza O'Clock menu.</p>
     </div>
     <div class="filter-tabs reveal">
       <button class="tab active" data-filter="all">All</button>
-      <button class="tab" data-filter="pizza">Pizza</button>
-      <button class="tab" data-filter="burgers">Burgers &amp; Sides</button>
-      <button class="tab" data-filter="appetizers">Appetizers</button>
+      <button class="tab" data-filter="pizza">Pizzas</button>
       <button class="tab" data-filter="pasta">Pasta</button>
+      <button class="tab" data-filter="appetizers">Appetizers</button>
+      <button class="tab" data-filter="burgers">Burgers &amp; Sides</button>
+      <button class="tab" data-filter="kidco">Kidco Club</button>
+      <button class="tab" data-filter="beverages">Beverages</button>
     </div>
     <div class="menu-grid reveal-stagger" id="menuGrid">
+      <div class="m-card pg-card" data-cat="pizza">
+        <span class="badge-pop">Most Popular</span>
+        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Supreme_pizza.jpg?width=800" alt="Somewhat Special" loading="lazy"></div>
+        <h3>Somewhat Special</h3>
+        <p class="pg-items">Pizza O'Clock Special, Bonfire, Click On, Super Supreme, Pizza Delight, Supreme Le'Bistro, Karara Tikka</p>
+        <div class="price-table"><div class="pt-row"><span>Small</span><b>Rs. 570</b></div><div class="pt-row"><span>Medium</span><b>Rs. 1300</b></div><div class="pt-row"><span>Large</span><b>Rs. 1740</b></div></div>
+        <p class="pg-note">+Rs. 70 extra for thin crust</p>
+      </div>
+      <div class="m-card pg-card" data-cat="pizza">
+        
+        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Slices_of_thin-crust_New_York_style_pizza.jpg?width=800" alt="Somewhat Traditional" loading="lazy"></div>
+        <h3>Somewhat Traditional</h3>
+        <p class="pg-items">Chicken Supreme, Veggie Lover, Hot n Spice, Chicken Tikka, Chicken Fajita, Fajita Sicilian, Euro, Cheese Lover</p>
+        <div class="price-table"><div class="pt-row"><span>Small</span><b>Rs. 550</b></div><div class="pt-row"><span>Medium</span><b>Rs. 1250</b></div><div class="pt-row"><span>Large</span><b>Rs. 1690</b></div></div>
+        <p class="pg-note">+Rs. 70 extra for thin crust</p>
+      </div>
+      <div class="m-card pg-card" data-cat="pizza">
+        
+        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Indian_Chicken_Seekh_Kebab.jpg?width=800" alt="Malai Boti" loading="lazy"></div>
+        <h3>Malai Boti</h3>
+        <p class="pg-items">Creamy chicken malai boti pizza</p>
+        <div class="price-table"><div class="pt-row"><span>Round · Medium</span><b>Rs. 1490</b></div><div class="pt-row"><span>Round · Large</span><b>Rs. 2290</b></div><div class="pt-row"><span>Square · Medium</span><b>Rs. 1870</b></div><div class="pt-row"><span>Square · Large</span><b>Rs. 2570</b></div></div>
+        
+      </div>
+      <div class="m-card pg-card" data-cat="pizza">
+        
+        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Supreme_pizza.jpg?width=800" alt="Behari Kebab" loading="lazy"></div>
+        <h3>Behari Kebab</h3>
+        <p class="pg-items">Spiced behari kebab pizza</p>
+        <div class="price-table"><div class="pt-row"><span>Round · Medium</span><b>Rs. 1490</b></div><div class="pt-row"><span>Round · Large</span><b>Rs. 2290</b></div><div class="pt-row"><span>Square · Medium</span><b>Rs. 1870</b></div><div class="pt-row"><span>Square · Large</span><b>Rs. 2570</b></div></div>
+        
+      </div>
+      <div class="m-card pg-card" data-cat="pizza">
+        
+        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Cheese_stuffed_crust.jpg?width=800" alt="Stuffed Crust" loading="lazy"></div>
+        <h3>Stuffed Crust</h3>
+        <p class="pg-items">Kebab Stuffer, Cheese Stuffer, Chicken n Cheese</p>
+        <div class="price-table"><div class="pt-row"><span>Round · Medium</span><b>Rs. 1490</b></div><div class="pt-row"><span>Round · Large</span><b>Rs. 2290</b></div><div class="pt-row"><span>Square · Medium</span><b>Rs. 1870</b></div><div class="pt-row"><span>Square · Large</span><b>Rs. 2570</b></div></div>
+        
+      </div>
+      <div class="m-card pg-card" data-cat="pizza">
+        
+        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Cheese_stuffed_crust.jpg?width=800" alt="Crown Crust" loading="lazy"></div>
+        <h3>Crown Crust</h3>
+        <p class="pg-items">Cheese-crowned signature crust</p>
+        <div class="price-table"><div class="pt-row"><span>Large only</span><b>Rs. 1990</b></div></div>
+        
+      </div>
+      <div class="m-card pg-card" data-cat="pizza">
+        <span class="badge-pop">Signature</span>
+        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Sfincione_palermitano.jpg?width=800" alt="Fun Square" loading="lazy"></div>
+        <h3>Fun Square</h3>
+        <p class="pg-items">The Square Pizza Co. — a playful twist on traditional round pizzas</p>
+        <div class="price-table"><div class="pt-row"><span>Small</span><b>Rs. 700</b></div><div class="pt-row"><span>Medium</span><b>Rs. 1540</b></div><div class="pt-row"><span>Large</span><b>Rs. 2290</b></div></div>
+        
+      </div>
       <div class="m-card" data-cat="pizza">
-        <span class="badge-pop">Bestseller</span>
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Sfincione_palermitano.jpg?width=800" alt="Square Pizza" loading="lazy"></div>
-        <h3>Square Pizza</h3>
-        <p>Our specialist square-shaped pizza — a playful twist on the classic round pie.</p>
-        <div class="m-foot"><span class="m-cat-tag">Pizza</span><span class="m-price">Rs 700 / 1540 / 2290</span></div>
-      </div>
-      <div class="m-card" data-cat="pizza">
-        <span class="badge-pop">Most popular</span>
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Supreme_pizza.jpg?width=800" alt="Super Supreme pizza" loading="lazy"></div>
-        <h3>Super Supreme</h3>
-        <p>Loaded with every topping from our Somewhat Special range.</p>
-        <div class="m-foot"><span class="m-cat-tag">Pizza</span><span class="m-price">Rs 570 / 1300 / 1740</span></div>
-      </div>
-      <div class="m-card" data-cat="pizza">
         
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Cheese_stuffed_crust.jpg?width=800" alt="Cheese Stuffer pizza" loading="lazy"></div>
-        <h3>Cheese Stuffer</h3>
-        <p>Molten cheese baked right into the crust for the ultimate pull.</p>
-        <div class="m-foot"><span class="m-cat-tag">Stuffed Crust</span><span class="m-price">Rs 1490 / 1870+</span></div>
-      </div>
-      <div class="m-card" data-cat="burgers">
-        
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Popeyes_chicken_sandwich.jpg?width=800" alt="Zinger burger" loading="lazy"></div>
-        <h3>Zinger Burger</h3>
-        <p>Crispy fried fillet, fresh lettuce and house mayo in a soft bun.</p>
-        <div class="m-foot"><span class="m-cat-tag">Burger</span><span class="m-price">Rs 440</span></div>
-      </div>
-      <div class="m-card" data-cat="appetizers">
-        
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Tortamex.jpg?width=800" alt="Mexican sandwich" loading="lazy"></div>
-        <h3>Mexican Sandwich</h3>
-        <p>Bun-baked chicken, veggies and cheese with a mayo-mustard twist.</p>
-        <div class="m-foot"><span class="m-cat-tag">Appetizer</span><span class="m-price">Rs 790</span></div>
-      </div>
-      <div class="m-card" data-cat="appetizers">
-        
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Paratha_roll.jpg?width=800" alt="Oven baked rolls" loading="lazy"></div>
-        <h3>Oven Baked Rolls</h3>
-        <p>Four juicy flavours — Tempeeli, Behari, Peri Peri, Malai Boti.</p>
-        <div class="m-foot"><span class="m-cat-tag">Appetizer</span><span class="m-price">Rs 700</span></div>
-      </div>
-      <div class="m-card" data-cat="burgers">
-        
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Loaded_fries.jpg?width=800" alt="Loaded fries" loading="lazy"></div>
-        <h3>Loaded Fries</h3>
-        <p>Crispy fries piled with melted cheese and house sauce.</p>
-        <div class="m-foot"><span class="m-cat-tag">Sides</span><span class="m-price">Rs 650</span></div>
-      </div>
-      <div class="m-card" data-cat="appetizers">
-        
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Homemade_buffalo_wings.jpg?width=800" alt="Oven baked wings" loading="lazy"></div>
-        <h3>Oven Baked Wings</h3>
-        <p>Spicy & juicy, or honey-glazed — baked fresh to order.</p>
-        <div class="m-foot"><span class="m-cat-tag">Appetizer</span><span class="m-price">Rs 480 / 850</span></div>
+        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Calzone_Tradition_+_poivrons.JPG?width=800" alt="Tempting Calzone" loading="lazy"></div>
+        <h3>Tempting Calzone</h3>
+        <p>Magnetic Flavor (9") · Sizzling Flavor (9")</p>
+        <div class="m-foot"><span class="m-cat-tag">Pizza</span><span class="m-price">Rs. 1090</span></div>
       </div>
       <div class="m-card" data-cat="pasta">
         
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Chicken_fettuccine_alfredo.JPG?width=800" alt="Signature pasta" loading="lazy"></div>
-        <h3>Pizza O'Clock Special Pasta</h3>
-        <p>Our house pasta, rich and creamy — a customer favourite.</p>
-        <div class="m-foot"><span class="m-cat-tag">Pasta</span><span class="m-price">Rs 550 / 900</span></div>
+        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Chicken_fettuccine_alfredo.JPG?width=800" alt="Pasta" loading="lazy"></div>
+        <h3>Pasta</h3>
+        <p>Pizza O'Clock Special · Flaming Pasta · Crunchy Pasta · Kebabish Pasta</p>
+        <div class="price-table small"><div class="pt-row"><span>Half</span><b>Rs. 550</b></div><div class="pt-row"><span>Full</span><b>Rs. 900</b></div></div>
       </div>
+      <div class="m-card" data-cat="appetizers">
+        
+        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Oven-baked_mozzarella_sticks.JPG?width=800" alt="Cheesy Sticks" loading="lazy"></div>
+        <h3>Cheesy Sticks</h3>
+        <p>4 pieces of cheese & white sauce stuffed bread sticks, served with dip sauce.</p>
+        <div class="m-foot"><span class="m-cat-tag">Appetizers</span><span class="m-price">Rs. 550</span></div>
+      </div>
+      <div class="m-card" data-cat="appetizers">
+        
+        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Indian_Chicken_Seekh_Kebab.jpg?width=800" alt="Kabab Sticks" loading="lazy"></div>
+        <h3>Kabab Sticks</h3>
+        <p>4 pieces of white sauce loaded kebab stuffed bread sticks, served with dip sauce.</p>
+        <div class="m-foot"><span class="m-cat-tag">Appetizers</span><span class="m-price">Rs. 570</span></div>
+      </div>
+      <div class="m-card" data-cat="appetizers">
+        
+        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Homemade_buffalo_wings.jpg?width=800" alt="Oven Baked Wings" loading="lazy"></div>
+        <h3>Oven Baked Wings</h3>
+        <p>Spicy & juicy wings, or honey wings.</p>
+        <div class="price-table small"><div class="pt-row"><span>Spicy · 12 pcs</span><b>Rs. 850</b></div><div class="pt-row"><span>Spicy · 6 pcs</span><b>Rs. 480</b></div><div class="pt-row"><span>Honey · 12 pcs</span><b>Rs. 860</b></div><div class="pt-row"><span>Honey · 6 pcs</span><b>Rs. 440</b></div></div>
+      </div>
+      <div class="m-card" data-cat="appetizers">
+        
+        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Paratha_roll.jpg?width=800" alt="Oven Baked Rolls" loading="lazy"></div>
+        <h3>Oven Baked Rolls</h3>
+        <p>Four flavours — Tempeeli, Behari, Peri Peri, Malai Boti — served with mayo dip sauce.</p>
+        <div class="m-foot"><span class="m-cat-tag">Appetizers</span><span class="m-price">Rs. 700</span></div>
+      </div>
+      <div class="m-card" data-cat="appetizers">
+        
+        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Homemade_buffalo_wings.jpg?width=800" alt="Platter" loading="lazy"></div>
+        <h3>Platter</h3>
+        <p>4 pieces of spring rolls served with 6 juicy oven baked wings & mayo dip sauce.</p>
+        <div class="price-table small"><div class="pt-row"><span>Malai Boti</span><b>Rs. 1180</b></div><div class="pt-row"><span>Pizza O'Clock Special</span><b>Rs. 999</b></div></div>
+      </div>
+      <div class="m-card" data-cat="burgers">
+        
+        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Popeyes_chicken_sandwich.jpg?width=800" alt="Burgers" loading="lazy"></div>
+        <h3>Burgers</h3>
+        <p>Patty · Cheese Patty · Zinger · Cheese Zinger</p>
+        <div class="price-table small"><div class="pt-row"><span>Patty Burger</span><b>Rs. 350</b></div><div class="pt-row"><span>Cheese Patty Burger</span><b>Rs. 400</b></div><div class="pt-row"><span>Zinger Burger</span><b>Rs. 440</b></div><div class="pt-row"><span>Cheese Zinger Burger</span><b>Rs. 490</b></div></div>
+      </div>
+      <div class="m-card" data-cat="burgers">
+        
+        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Tortamex.jpg?width=800" alt="Mexican Sandwich" loading="lazy"></div>
+        <h3>Mexican Sandwich</h3>
+        <p>A bun baked with chicken, veggies & cheese, with a twist of mayo mustard sauce.</p>
+        <div class="m-foot"><span class="m-cat-tag">Burgers</span><span class="m-price">Rs. 790</span></div>
+      </div>
+      <div class="m-card" data-cat="burgers">
+        
+        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Chicken_Nuggets.jpg?width=800" alt="Nuggets" loading="lazy"></div>
+        <h3>Nuggets</h3>
+        <p>Crispy golden chicken nuggets.</p>
+        <div class="price-table small"><div class="pt-row"><span>12 pcs</span><b>Rs. 570</b></div><div class="pt-row"><span>6 pcs</span><b>Rs. 330</b></div></div>
+      </div>
+      <div class="m-card" data-cat="burgers">
+        
+        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/French_Fries.JPG?width=800" alt="French Fries" loading="lazy"></div>
+        <h3>French Fries</h3>
+        <p>Classic crispy fries.</p>
+        <div class="price-table small"><div class="pt-row"><span>Family</span><b>Rs. 550</b></div><div class="pt-row"><span>Single</span><b>Rs. 330</b></div></div>
+      </div>
+      <div class="m-card" data-cat="burgers">
+        
+        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Loaded_fries.jpg?width=800" alt="Loaded Fries" loading="lazy"></div>
+        <h3>Loaded Fries</h3>
+        <p>Crispy fries piled with melted cheese and house sauce.</p>
+        <div class="m-foot"><span class="m-cat-tag">Burgers</span><span class="m-price">Rs. 650</span></div>
+      </div>
+      <div class="m-card" data-cat="kidco">
+        
+        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Chicken_Nuggets.jpg?width=800" alt="Kidco Deal 1" loading="lazy"></div>
+        <h3>Kidco Deal 1</h3>
+        <p>Kidco Pizza + Nuggets + Fries + Juice.</p>
+        <div class="m-foot"><span class="m-cat-tag">Kidco</span><span class="m-price">Rs. 599</span></div>
+      </div>
+      <div class="m-card" data-cat="kidco">
+        
+        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Chicken_Nuggets.jpg?width=800" alt="Kidco Deal 2" loading="lazy"></div>
+        <h3>Kidco Deal 2</h3>
+        <p>Kidco Burger + Nuggets + Fries + Juice.</p>
+        <div class="m-foot"><span class="m-cat-tag">Kidco</span><span class="m-price">Rs. 599</span></div>
+      </div>
+      <div class="m-card" data-cat="beverages">
+        
+        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Soft_drink_shelf.JPG?width=800" alt="Beverages" loading="lazy"></div>
+        <h3>Beverages</h3>
+        <p>500 ML Drink · Tin Pack · 1 Ltr Drink · 1.5 Ltr Drink · Mineral Water (S) · Mineral Water (L)</p>
+        <div class="price-table small"><div class="pt-row"><span>500 ML Drink</span><b>Rs. 130</b></div><div class="pt-row"><span>Tin Pack</span><b>Rs. 130</b></div><div class="pt-row"><span>1 Ltr Drink</span><b>Rs. 210</b></div><div class="pt-row"><span>1.5 Ltr Drink</span><b>Rs. 240</b></div><div class="pt-row"><span>Mineral Water (S)</span><b>Rs. 90</b></div><div class="pt-row"><span>Mineral Water (L)</span><b>Rs. 120</b></div></div>
+      </div>
+
     </div>
 
-    <div class="sec-head reveal" style="margin-top:80px;">
-      <span class="eyebrow">Complete price list</span>
-      <h2>Full menu</h2>
-      <p>Every pizza, side and deal on the Pizza O'Clock menu — Vehari &amp; Burewala branches.</p>
-    </div>
-    <div class="price-tabs reveal" id="priceTabs">
-      <button class="p-tab active" data-panel="all">All</button>
-      <button class="p-tab" data-panel="special">Special</button>
-      <button class="p-tab" data-panel="traditional">Traditional</button>
-      <button class="p-tab" data-panel="square">Square</button>
-      <button class="p-tab" data-panel="boti">Boti &amp; Kebab</button>
-      <button class="p-tab" data-panel="stuffed">Stuffed Crust</button>
-      <button class="p-tab" data-panel="calzone">Calzone &amp; Pasta</button>
-      <button class="p-tab" data-panel="burgers">Burgers &amp; Sides</button>
-      <button class="p-tab" data-panel="appetizers">Appetizers</button>
-      <button class="p-tab" data-panel="beverages">Beverages</button>
-      <button class="p-tab" data-panel="extras">Extras</button>
-    </div>
-    <div class="price-panels reveal" id="pricePanels">
-      <div class="price-panel" data-panel="special">
-        <div class="price-cat-note">Small Rs 570 &middot; Medium Rs 1300 &middot; Large Rs 1740 &middot; +Rs 70 for thin crust</div>
-        <div class="price-rows">
-            <div class="price-row"><div><span class="name">Pizza O'Clock Special</span></div><span class="price"></span></div>
-            <div class="price-row"><div><span class="name">Bonfire</span></div><span class="price"></span></div>
-            <div class="price-row"><div><span class="name">Click On</span></div><span class="price"></span></div>
-            <div class="price-row"><div><span class="name">Super Supreme</span></div><span class="price"></span></div>
-            <div class="price-row"><div><span class="name">Pizza Delight</span></div><span class="price"></span></div>
-            <div class="price-row"><div><span class="name">Supreme Le'Bistro</span></div><span class="price"></span></div>
-            <div class="price-row"><div><span class="name">Karara Tikka</span></div><span class="price"></span></div>
-        </div>
+    <div class="extras-note reveal">
+      <div class="extras-col">
+        <h4>Sauces</h4>
+        <div class="extras-row"><span>Dip Sauce</span><b>Rs. 110</b></div>
+        <div class="extras-row"><span>Mayo Mustard</span><b>Rs. 110</b></div>
+        <div class="extras-row"><span>Thousand Island</span><b>Rs. 110</b></div>
       </div>
-      <div class="price-panel" data-panel="traditional">
-        <div class="price-cat-note">Small Rs 550 &middot; Medium Rs 1250 &middot; Large Rs 1690 &middot; +Rs 70 for thin crust</div>
-        <div class="price-rows">
-            <div class="price-row"><div><span class="name">Chicken Supreme</span></div><span class="price"></span></div>
-            <div class="price-row"><div><span class="name">Chicken Tikka</span></div><span class="price"></span></div>
-            <div class="price-row"><div><span class="name">Veggie Lover</span></div><span class="price"></span></div>
-            <div class="price-row"><div><span class="name">Chicken Fajita</span></div><span class="price"></span></div>
-            <div class="price-row"><div><span class="name">Hot n Spice</span></div><span class="price"></span></div>
-            <div class="price-row"><div><span class="name">Fajita Sicilian</span></div><span class="price"></span></div>
-            <div class="price-row"><div><span class="name">Euro</span></div><span class="price"></span></div>
-            <div class="price-row"><div><span class="name">Cheese Lover</span></div><span class="price"></span></div>
-        </div>
+      <div class="extras-col">
+        <h4>Extra Topping</h4>
+        <div class="extras-row"><span>Chicken — Small / Medium / Large</span><b>Rs. 110 / 150 / 210</b></div>
+        <div class="extras-row"><span>Cheese — Small / Medium / Large</span><b>Rs. 110 / 150 / 210</b></div>
       </div>
-      <div class="price-panel" data-panel="square">
-        <div class="price-cat-note">Small Rs 700 &middot; Medium Rs 1540 &middot; Large Rs 2290</div>
-        <div class="price-rows">
-            <div class="price-row"><div><span class="name">Signature Square Pizza</span><span class="desc">Specialist square-shaped pizzas — a playful twist on round pizzas</span></div><span class="price"></span></div>
-        </div>
-      </div>
-      <div class="price-panel" data-panel="boti">
-        <div class="price-cat-note">Round: Medium Rs 1490 / Large Rs 2290 &middot; Square: Medium Rs 1870 / Large Rs 2570</div>
-        <div class="price-rows">
-            <div class="price-row"><div><span class="name">Malai Boti Pizza</span></div><span class="price"></span></div>
-            <div class="price-row"><div><span class="name">Behari Kebab Pizza</span></div><span class="price"></span></div>
-        </div>
-      </div>
-      <div class="price-panel" data-panel="stuffed">
-        <div class="price-cat-note">Stuffed — Round: Medium Rs 1490 / Large Rs 2290 &middot; Square: Medium Rs 1870 / Large Rs 2570</div>
-        <div class="price-rows">
-            <div class="price-row"><div><span class="name">Kebab Stuffer</span></div><span class="price"></span></div>
-            <div class="price-row"><div><span class="name">Cheese Stuffer</span></div><span class="price"></span></div>
-            <div class="price-row"><div><span class="name">Chicken N Cheese</span></div><span class="price"></span></div>
-            <div class="price-row"><div><span class="name">Crown Crust</span><span class="desc">Only in Large</span></div><span class="price">Rs 1990</span></div>
-        </div>
-      </div>
-      <div class="price-panel" data-panel="calzone">
-        <div class="price-cat-note">Calzone (9") — Rs 1090 &middot; Pasta — Half Rs 550 / Full Rs 900</div>
-        <div class="price-rows">
-            <div class="price-row"><div><span class="name">Magnetic Flavor Calzone</span></div><span class="price"></span></div>
-            <div class="price-row"><div><span class="name">Sizzling Flavor Calzone</span></div><span class="price"></span></div>
-            <div class="price-row"><div><span class="name">Pizza O'Clock Special Pasta</span></div><span class="price"></span></div>
-            <div class="price-row"><div><span class="name">Flaming Pasta</span></div><span class="price"></span></div>
-            <div class="price-row"><div><span class="name">Crunchy Pasta</span></div><span class="price"></span></div>
-            <div class="price-row"><div><span class="name">Kebabish Pasta</span></div><span class="price"></span></div>
-        </div>
-      </div>
-      <div class="price-panel" data-panel="burgers">
-        <div class="price-cat-note"></div>
-        <div class="price-rows">
-            <div class="price-row"><div><span class="name">Patty Burger</span></div><span class="price">Rs 350</span></div>
-            <div class="price-row"><div><span class="name">Cheese Patty Burger</span></div><span class="price">Rs 400</span></div>
-            <div class="price-row"><div><span class="name">Zinger Burger</span></div><span class="price">Rs 440</span></div>
-            <div class="price-row"><div><span class="name">Cheese Zinger Burger</span></div><span class="price">Rs 490</span></div>
-            <div class="price-row"><div><span class="name">Nuggets</span><span class="desc">6 pcs / 12 pcs</span></div><span class="price">Rs 330 / 570</span></div>
-            <div class="price-row"><div><span class="name">French Fries</span><span class="desc">Single / Family</span></div><span class="price">Rs 330 / 550</span></div>
-            <div class="price-row"><div><span class="name">Loaded Fries</span></div><span class="price">Rs 650</span></div>
-        </div>
-      </div>
-      <div class="price-panel" data-panel="appetizers">
-        <div class="price-cat-note"></div>
-        <div class="price-rows">
-            <div class="price-row"><div><span class="name">Cheesy Sticks</span><span class="desc">4 pcs, cheese &amp; white sauce stuffed, dip sauce</span></div><span class="price">Rs 550</span></div>
-            <div class="price-row"><div><span class="name">Kabab Sticks</span><span class="desc">4 pcs, white sauce loaded kebab stuffed, dip sauce</span></div><span class="price">Rs 570</span></div>
-            <div class="price-row"><div><span class="name">Oven Baked Wings</span><span class="desc">6 pcs / 12 pcs, spicy or honey</span></div><span class="price">Rs 480 / 850</span></div>
-            <div class="price-row"><div><span class="name">Mexican Sandwich</span><span class="desc">Chicken, veggies &amp; cheese, mayo-mustard twist</span></div><span class="price">Rs 790</span></div>
-            <div class="price-row"><div><span class="name">Oven Baked Rolls</span><span class="desc">Tempeeli, Behari, Peri Peri or Malai Boti</span></div><span class="price">Rs 700</span></div>
-            <div class="price-row"><div><span class="name">Platter</span><span class="desc">Spring rolls + wings + dip &middot; Malai Boti variant</span></div><span class="price">Rs 999 / 1180</span></div>
-        </div>
-      </div>
-      <div class="price-panel" data-panel="beverages">
-        <div class="price-cat-note"></div>
-        <div class="price-rows">
-            <div class="price-row"><div><span class="name">500 ml Drink</span></div><span class="price">Rs 130</span></div>
-            <div class="price-row"><div><span class="name">Tin Pack</span></div><span class="price">Rs 130</span></div>
-            <div class="price-row"><div><span class="name">1 Ltr Drink</span></div><span class="price">Rs 210</span></div>
-            <div class="price-row"><div><span class="name">1.5 Ltr Drink</span></div><span class="price">Rs 240</span></div>
-            <div class="price-row"><div><span class="name">Mineral Water (Small)</span></div><span class="price">Rs 90</span></div>
-            <div class="price-row"><div><span class="name">Mineral Water (Large)</span></div><span class="price">Rs 120</span></div>
-        </div>
-      </div>
-      <div class="price-panel" data-panel="extras">
-        <div class="price-cat-note"></div>
-        <div class="price-rows">
-            <div class="price-row"><div><span class="name">Dip Sauce</span></div><span class="price">Rs 110</span></div>
-            <div class="price-row"><div><span class="name">Mayo Mustard</span></div><span class="price">Rs 110</span></div>
-            <div class="price-row"><div><span class="name">Thousand Island</span></div><span class="price">Rs 110</span></div>
-            <div class="price-row"><div><span class="name">Extra Chicken Topping</span><span class="desc">Small / Medium / Large</span></div><span class="price">Rs 110 / 150 / 210</span></div>
-            <div class="price-row"><div><span class="name">Extra Cheese Topping</span><span class="desc">Small / Medium / Large</span></div><span class="price">Rs 110 / 150 / 210</span></div>
-        </div>
-      </div>
+      <p class="extras-fine">* Disposable glass charges are included. Printing errors are acceptable.</p>
     </div>
   </div>
 </section>
@@ -803,109 +835,102 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow" style="background:rgba(255,193,7,0.12); border-color:rgba(255,193,7,0.3); color:var(--yellow);">Value packs</span>
-      <h2>Deals &amp; combos</h2>
+      <h2>Deals &amp; offers</h2>
       <p>Built for every table size — solo cravings to full birthday parties.</p>
     </div>
+
+    <h3 class="deals-subhead">Family &amp; Party Deals</h3>
     <div class="deals-grid reveal-stagger">
       <div class="d-card">
-        <div class="d-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3L21 20H3L12 3Z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg></div>
+        <span class="deal-tag">Tuesday Night Only</span>
         <h3>Mega Deal</h3>
         <p>3 Large Special Pizzas + 2 Drinks (1.5 Ltr)</p>
-        <div class="d-price">Rs 5700</div>
-        <p class="d-note">Tuesday night only</p>
+        <div class="deal-price">Rs. 5700</div>
       </div>
       <div class="d-card">
-        <div class="d-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 8L8 12L12 5L16 12L21 8L19 18H5L3 8Z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg></div>
+        
         <h3>Royal Deal</h3>
-        <p>2 Large Special Pizzas + 12 pcs Wings + 1.5 Ltr Drink</p>
-        <div class="d-price">Rs 4500</div>
-        
+        <p>2 Large Special Pizzas + 12 pcs Wings + 1 Drink (1.5 Ltr)</p>
+        <div class="deal-price">Rs. 4500</div>
       </div>
       <div class="d-card">
-        <div class="d-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3" stroke="#fff" stroke-width="2"/><circle cx="17" cy="9" r="2.5" stroke="#fff" stroke-width="2"/><path d="M3 20C3 16.5 5.7 14 9 14C11.6 14 13.8 15.5 14.6 17.6" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div>
+        
         <h3>Family Ties</h3>
-        <p>1 Large + 1 Medium Square Pizza + 12 pcs Wings + 1 Small Pasta + 2 Drinks (1.5 Ltr)</p>
-        <div class="d-price">Rs 5600</div>
-        
+        <p>1 Large + 1 Medium Square Pizza + 1 Small Pasta + 2 Drinks (1.5 Ltr)</p>
+        <div class="deal-price">Rs. 5600</div>
       </div>
       <div class="d-card">
-        <div class="d-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 8V21" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M4 12H20V21H4V12Z" stroke="#fff" stroke-width="2"/><path d="M4 8H20V12H4V8Z" stroke="#fff" stroke-width="2"/></svg></div>
+        
         <h3>Birthday Bash</h3>
         <p>3 Square Pizzas + 12 pcs Wings + 2 Drinks (1.5 Ltr)</p>
-        <div class="d-price">Rs 8290</div>
-        
-      </div>
-      <div class="d-card">
-        <div class="d-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#fff" stroke-width="2"/><path d="M4 20C4 16 7.5 13 12 13C16.5 13 20 16 20 20" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div>
-        <h3>Kidco Meal — Deal 1</h3>
-        <p>Kidco Pizza + Nuggets + Fries + Juice</p>
-        <div class="d-price">Rs 599</div>
-        
-      </div>
-      <div class="d-card">
-        <div class="d-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#fff" stroke-width="2"/><path d="M4 20C4 16 7.5 13 12 13C16.5 13 20 16 20 20" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div>
-        <h3>Kidco Meal — Deal 2</h3>
-        <p>Kidco Burger + Nuggets + Fries + Juice</p>
-        <div class="d-price">Rs 599</div>
-        
+        <div class="deal-price">Rs. 8290</div>
       </div>
     </div>
 
-    <div class="sec-head reveal" style="margin-top:70px;">
-      <span class="eyebrow" style="background:rgba(255,193,7,0.12); border-color:rgba(255,193,7,0.3); color:var(--yellow);">11:00 PM &ndash; Close</span>
-      <h2>Crazy Midnight Madness</h2>
-      <p>Late-night-only deals — priced for the after-hours crowd.</p>
-    </div>
-    <div class="midnight-grid reveal-stagger">
-      <div class="mn-card">
-        <h4>Deal 1</h4>
-        <p>1 Small Pizza + Drink (500 ml)</p>
-        <span class="mn-price">Rs 690</span>
+    <h3 class="deals-subhead midnight">
+      <span class="dot-live"></span> Crazy Midnight Madness
+      <span class="deals-subnote">11:00 PM to close</span>
+    </h3>
+    <div class="deals-grid deals-grid-5 reveal-stagger">
+      <div class="d-card">
+        
+        <h3>Deal 1</h3>
+        <p>1 Small Pizza + 1 Drink (500 ml)</p>
+        <div class="deal-price">Rs. 690</div>
       </div>
-      <div class="mn-card">
-        <h4>Deal 2</h4>
-        <p>1 Medium Special Pizza + Drink (500 ml)</p>
-        <span class="mn-price">Rs 1390</span>
+      <div class="d-card">
+        
+        <h3>Deal 2</h3>
+        <p>1 Medium Special Pizza + 1 Drink (500 ml)</p>
+        <div class="deal-price">Rs. 1390</div>
       </div>
-      <div class="mn-card">
-        <h4>Deal 3</h4>
-        <p>2 Small Pizzas + 1 Pasta + Drink (500 ml)</p>
-        <span class="mn-price">Rs 1690</span>
+      <div class="d-card">
+        
+        <h3>Deal 3</h3>
+        <p>2 Small Pizzas + 1 Pasta + 1 Drink (500 ml)</p>
+        <div class="deal-price">Rs. 1690</div>
       </div>
-      <div class="mn-card">
-        <h4>Deal 4</h4>
-        <p>1 Large Special Pizza + Drink (1.5 Ltr)</p>
-        <span class="mn-price">Rs 1890</span>
+      <div class="d-card">
+        
+        <h3>Deal 4</h3>
+        <p>1 Large Special Pizza + 1 Drink (1.5 Ltr)</p>
+        <div class="deal-price">Rs. 1890</div>
       </div>
-      <div class="mn-card">
-        <h4>Deal 5</h4>
-        <p>1 Large Pizza + 1 Pasta + Drink (1.5 Ltr)</p>
-        <span class="mn-price">Rs 2690</span>
+      <div class="d-card">
+        
+        <h3>Deal 5</h3>
+        <p>1 Large Pizza + 1 Pasta + 1 Drink (1.5 Ltr)</p>
+        <div class="deal-price">Rs. 2690</div>
       </div>
-      <div class="mn-card">
-        <h4>Deal 6</h4>
-        <p>2 Large Special Pizzas + Drink (1.5 Ltr)</p>
-        <span class="mn-price">Rs 3700</span>
+      <div class="d-card">
+        
+        <h3>Deal 6</h3>
+        <p>2 Large Special Pizzas + 1 Drink (1.5 Ltr)</p>
+        <div class="deal-price">Rs. 3700</div>
       </div>
-      <div class="mn-card">
-        <h4>Square Deal</h4>
-        <p>1 Square Pizza + Drink (1.5 Ltr)</p>
-        <span class="mn-price">Rs 2590</span>
+      <div class="d-card">
+        
+        <h3>Square Deal</h3>
+        <p>1 Square Pizza + 1 Drink (1.5 Ltr)</p>
+        <div class="deal-price">Rs. 2590</div>
       </div>
-      <div class="mn-card">
-        <h4>Chaska Deal</h4>
-        <p>1 Pasta + 6 pcs Wings + Drink (500 ml)</p>
-        <span class="mn-price">Rs 1200</span>
+      <div class="d-card">
+        
+        <h3>Chaska Deal</h3>
+        <p>1 Pasta + 6 pcs Wings + 1 Drink (500 ml)</p>
+        <div class="deal-price">Rs. 1200</div>
       </div>
-      <div class="mn-card">
-        <h4>Zinger Deal 1</h4>
-        <p>1 Zinger Burger + Fries + Drink (500 ml)</p>
-        <span class="mn-price">Rs 900</span>
+      <div class="d-card">
+        
+        <h3>Zinger Deal 1</h3>
+        <p>1 Zinger Burger + 1 Fries + 1 Drink (500 ml)</p>
+        <div class="deal-price">Rs. 900</div>
       </div>
-      <div class="mn-card">
-        <h4>Zinger Deal 2</h4>
-        <p>3 Zinger Burgers + Fries + Drink (1.5 Ltr)</p>
-        <span class="mn-price">Rs 1700</span>
+      <div class="d-card">
+        
+        <h3>Zinger Deal 2</h3>
+        <p>3 Zinger Burgers + 1 Fries + 1 Drink (1.5 Ltr)</p>
+        <div class="deal-price">Rs. 1700</div>
       </div>
     </div>
   </div>
