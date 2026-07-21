@@ -168,27 +168,79 @@
   .hero-stat b{ display:block; font-family:var(--font-head); font-size:26px; color:#fff; font-weight:800; }
   .hero-stat span{ display:block; font-size:12.5px; color:rgba(255,255,255,.55); font-weight:600; margin-top:2px; }
 
-  .hero-visual{ position:relative; display:flex; align-items:center; justify-content:center; }
+.hero-visual{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 520px;
+}
+  .hero-photo-wrap{
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 1/1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .hero-photo-wrap::before{
     content: "";
     position: absolute;
-    width: 80%;
-    height: 80%;
+
+    width: 420px;
+    height: 420px;
+
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
     border-radius: 50%;
-    background: radial-gradient(circle,
-        rgba(255,180,0,.35),
-        rgba(255,80,0,.15),
-        transparent 75%);
-    filter: blur(40px);
+
+    background: radial-gradient(
+        circle,
+        rgba(255,180,0,.35) 0%,
+        rgba(255,90,0,.18) 45%,
+        transparent 75%
+    );
+
+    filter: blur(60px);
+
     z-index: 0;
 }
-
 .hero-photo{
     position: relative;
     z-index: 2;
+
+    width: 100%;
+    max-width: 470px;
+    height: auto;
+
+    object-fit: contain;
+
+    animation: float 5s ease-in-out infinite;
+
+    filter:
+        drop-shadow(0 30px 40px rgba(0,0,0,.35))
+        drop-shadow(0 40px 70px rgba(0,0,0,.20));
 }
   }
-  @keyframes float{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(-14px);} }
+@keyframes float{
+
+    0%{
+        transform: translateY(0px);
+    }
+
+    50%{
+        transform: translateY(-12px);
+    }
+
+    100%{
+        transform: translateY(0px);
+    }
+
+}
   .open-pill{
     position:absolute; top:-16px; left:-16px; background:var(--yellow); color:var(--dark); font-weight:800; font-size:12.5px;
     padding:9px 16px; border-radius:999px; display:flex; align-items:center; gap:7px; box-shadow:var(--shadow-md);
