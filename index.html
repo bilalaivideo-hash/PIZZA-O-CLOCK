@@ -179,16 +179,25 @@
 }
 
 .hero-photo-wrap{
-    position: relative;
-    width: 100%;
-    max-width: 560px;
-    aspect-ratio: 1 / 1;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position:relative;
+
+    width:100%;
+
+    max-width:560px;
+
+    aspect-ratio:1/1;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding-top:60px;
+
+    padding-bottom:60px;
 }
-
 /* Glow */
 
 .hero-photo-wrap::before{
@@ -320,16 +329,13 @@
  .open-pill{
     position:absolute;
 
-    top:30px;
+    top:20px;
     left:50%;
 
     transform:translateX(-50%);
 
     background:var(--yellow);
     color:var(--dark);
-
-    font-weight:800;
-    font-size:13px;
 
     padding:10px 18px;
 
@@ -339,28 +345,33 @@
     align-items:center;
     gap:8px;
 
+    font-size:13px;
+    font-weight:800;
+
     box-shadow:var(--shadow-md);
 
     z-index:10;
-  }
+}
   .open-pill .dot{ width:8px; height:8px; border-radius:50%; background:#1f7a3c; animation:pulse 1.6s infinite; }
   @keyframes pulse{ 0%{box-shadow:0 0 0 0 rgba(31,122,60,.55);} 70%{box-shadow:0 0 0 8px rgba(31,122,60,0);} 100%{box-shadow:0 0 0 0 rgba(31,122,60,0);} }
-  .price-tag{
+.price-tag{
+
     position:absolute;
 
-    right:10px;
-    bottom:20px;
+    bottom:15px;
+    right:0;
 
     background:var(--red);
+
     color:#fff;
 
-    padding:14px 20px;
+    padding:14px 22px;
 
     border-radius:18px;
 
-    box-shadow:var(--shadow-md);
-
     font-family:var(--font-head);
+
+    box-shadow:var(--shadow-md);
 
     z-index:10;
 }
