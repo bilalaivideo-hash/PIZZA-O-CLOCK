@@ -169,35 +169,26 @@
   .hero-stat span{ display:block; font-size:12.5px; color:rgba(255,255,255,.55); font-weight:600; margin-top:2px; }
 
 /* ================= HERO IMAGE ================= */
-
+  
 .hero-visual{
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 580px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:600px;
 }
 
 .hero-photo-wrap{
-
     position:relative;
-
     width:100%;
-
     max-width:560px;
-
     aspect-ratio:1/1;
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
-    padding-top:60px;
-
-    padding-bottom:60px;
 }
+
 /* Glow */
 
 .hero-photo-wrap::before{
@@ -214,14 +205,13 @@
 
     border-radius:50%;
 
-    background:
-    radial-gradient(circle,
+    background:radial-gradient(circle,
         rgba(255,190,0,.45) 0%,
         rgba(255,120,0,.22) 35%,
         rgba(255,60,0,.10) 60%,
         transparent 80%);
 
-    filter:blur(75px);
+    filter:blur(80px);
 
     z-index:0;
 }
@@ -232,13 +222,13 @@
     content:"";
     position:absolute;
 
-    bottom:28px;
+    bottom:40px;
     left:50%;
 
     transform:translateX(-50%);
 
-    width:320px;
-    height:55px;
+    width:340px;
+    height:60px;
 
     border-radius:50%;
 
@@ -255,51 +245,229 @@
 
     position:relative;
 
-    z-index:2;
+    z-index:5;
 
     width:100%;
     max-width:560px;
-    height:auto;
 
     object-fit:contain;
 
-    user-select:none;
-    pointer-events:none;
-
-    animation:float 5.5s ease-in-out infinite;
+    animation:pizzaFloat 5s ease-in-out infinite;
 
     filter:
-        drop-shadow(0 18px 28px rgba(0,0,0,.30))
-        drop-shadow(0 40px 65px rgba(0,0,0,.20));
+        drop-shadow(0 20px 35px rgba(0,0,0,.30))
+        drop-shadow(0 40px 70px rgba(0,0,0,.22));
+
+    user-select:none;
+    pointer-events:none;
 }
 
-/* Floating */
+/* ===========================
+   FLOATING CARDS
+=========================== */
 
-@keyframes float{
+.floating-card{
+
+    position:absolute;
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    padding:14px 18px;
+
+    background:rgba(22,22,22,.90);
+
+    backdrop-filter:blur(12px);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:18px;
+
+    color:#fff;
+
+    box-shadow:0 18px 40px rgba(0,0,0,.28);
+
+    z-index:20;
+
+    animation:cardFloat 4s ease-in-out infinite;
+}
+
+.floating-card strong{
+    display:block;
+    font-size:15px;
+    font-weight:700;
+}
+
+.floating-card small{
+    display:block;
+    opacity:.75;
+    font-size:11px;
+}
+
+/* Open */
+
+.open-card{
+
+    top:0;
+
+    left:50%;
+
+    transform:translateX(-50%);
+}
+
+/* Rating */
+
+.rating-card{
+
+    left:-20px;
+
+    top:52%;
+
+    transform:translateY(-50%);
+}
+
+/* Delivery */
+
+.delivery-card{
+
+    left:60px;
+
+    bottom:20px;
+}
+
+/* Price */
+
+.price-card{
+
+    right:-20px;
+
+    bottom:90px;
+
+    background:#E53935;
+}
+
+.price-card strong{
+
+    font-size:22px;
+}
+
+.status-dot{
+
+    width:12px;
+    height:12px;
+
+    border-radius:50%;
+
+    background:#32D74B;
+
+    box-shadow:0 0 12px #32D74B;
+}
+
+/* Pizza Float */
+
+@keyframes pizzaFloat{
 
     0%{
-        transform:
-            translateX(-25px)
-            translateY(0px)
-            rotate(-1deg);
+
+        transform:translateY(0px);
+
     }
 
     50%{
-        transform:
-            translateX(-25px)
-            translateY(-14px)
-            rotate(1deg);
+
+        transform:translateY(-15px);
+
     }
 
     100%{
-        transform:
-            translateX(-25px)
-            translateY(0px)
-            rotate(-1deg);
+
+        transform:translateY(0px);
+
     }
 
 }
 
+/* Cards Float */
+
+@keyframes cardFloat{
+
+    0%{
+
+        transform:translateY(0px);
+
+    }
+
+    50%{
+
+        transform:translateY(-8px);
+
+    }
+
+    100%{
+
+        transform:translateY(0px);
+
+    }
+
+}
+
+/* Responsive */
+
+@media(max-width:900px){
+
+.hero-visual{
+
+min-height:420px;
+
+}
+
+.hero-photo{
+
+max-width:380px;
+
+}
+
+.hero-photo-wrap::before{
+
+width:320px;
+height:320px;
+
+}
+
+.hero-photo-wrap::after{
+
+width:220px;
+height:40px;
+
+}
+
+.rating-card{
+
+left:0;
+top:65%;
+
+}
+
+.delivery-card{
+
+left:10px;
+bottom:10px;
+
+}
+
+.price-card{
+
+right:0;
+bottom:45px;
+
+}
+
+.floating-card{
+
+transform:scale(.88);
+
+}
 /* Mobile */
 
 @media (max-width:900px){
@@ -663,12 +831,51 @@
       </div>
     </div>
     <div class="hero-visual">
-      <div class="hero-photo-wrap">
-        <div class="open-pill"><span class="dot"></span> Open now · closes 3AM</div>
-<img class="hero-photo" src="images/pizza.png" alt="Pizza O'Clock Signature Pizza" loading="eager" decoding="async">
-        <div class="price-tag"><b>Rs. 700+</b><span>Fun Square Pizza</span></div>
-      </div>
+    <div class="hero-photo-wrap">
+
+    <!-- Open Card -->
+    <div class="floating-card open-card">
+        <span class="status-dot"></span>
+        <div>
+            <strong>Open Now</strong>
+            <small>Closes 3:00 AM</small>
+        </div>
     </div>
+
+    <!-- Rating Card -->
+    <div class="floating-card rating-card">
+        ⭐
+        <div>
+            <strong>4.8</strong>
+            <small>400+ Reviews</small>
+        </div>
+    </div>
+
+    <!-- Delivery Card -->
+    <div class="floating-card delivery-card">
+        🚚
+        <div>
+            <strong>25 Min</strong>
+            <small>Fast Delivery</small>
+        </div>
+    </div>
+
+    <!-- Price Card -->
+    <div class="floating-card price-card">
+        <div>
+            <strong>Rs. 700+</strong>
+            <small>Fun Square Pizza</small>
+        </div>
+    </div>
+
+    <!-- Pizza Image -->
+    <img class="hero-photo"
+         src="images/pizza.png"
+         alt="Pizza O'Clock Signature Pizza"
+         loading="eager"
+         decoding="async">
+
+</div>
   </div>
 </section>
 
