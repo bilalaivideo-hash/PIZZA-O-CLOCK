@@ -662,6 +662,130 @@
   .reveal.in{ opacity:1; transform:translateY(0); }
 
   .progress-bar{ position:fixed; top:0; left:0; height:3px; background:linear-gradient(90deg,var(--red),var(--yellow)); width:0%; z-index:400; }
+
+  /* ===== MENU & DEALS — ACCORDION ===== */
+  .menu2{ background:var(--dark); }
+  .menu2 .sec-head h2{ color:#fff; }
+  .menu2 .sec-head p{ color:rgba(255,255,255,.6); }
+
+  .accordion{ display:flex; flex-direction:column; gap:16px; }
+  .acc-item{
+    background:var(--dark-soft); border:1px solid var(--line); border-radius:var(--radius);
+    overflow:hidden; transition:border-color .3s ease, box-shadow .3s ease;
+  }
+  .acc-item.open{ border-color:rgba(214,40,40,.45); box-shadow:0 16px 40px rgba(0,0,0,.35); }
+  .acc-head{
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
+    padding:20px 22px; cursor:pointer; user-select:none; background:none; border:none; width:100%;
+    text-align:left; font-family:var(--font-body);
+  }
+  .acc-head-left{ display:flex; align-items:center; gap:14px; }
+  .acc-emoji{
+    width:46px; height:46px; border-radius:14px; background:rgba(214,40,40,.12); border:1px solid rgba(214,40,40,.3);
+    display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0;
+    transition:transform .35s var(--ease), background .3s ease;
+  }
+  .acc-item.open .acc-emoji{ background:var(--red); transform:scale(1.08) rotate(-6deg); }
+  .acc-title{ display:flex; flex-direction:column; gap:2px; }
+  .acc-title h3{ color:#fff; font-size:18px; font-family:var(--font-head); font-weight:700; letter-spacing:0; }
+  .acc-title span{ color:rgba(255,255,255,.5); font-size:12.5px; font-weight:500; }
+  .acc-head-right{ display:flex; align-items:center; gap:14px; }
+  .acc-count{
+    font-family:var(--font-head); font-size:11.5px; font-weight:700; color:var(--yellow);
+    background:rgba(245,194,66,.12); border:1px solid rgba(245,194,66,.3); padding:4px 11px; border-radius:999px;
+  }
+  .acc-chevron{ transition:transform .35s var(--ease); color:rgba(255,255,255,.6); flex-shrink:0; }
+  .acc-item.open .acc-chevron{ transform:rotate(180deg); color:var(--yellow); }
+  .acc-body{ max-height:0; overflow:hidden; transition:max-height .45s var(--ease); }
+  .acc-body-inner{ padding:4px 22px 24px; }
+
+  .food-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  @media (max-width:980px){ .food-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:640px){ .food-grid{ grid-template-columns:1fr; } }
+
+  .food-card{
+    background:var(--dark); border:1px solid var(--line); border-radius:14px; padding:20px;
+    display:flex; flex-direction:column; gap:12px; position:relative; overflow:hidden;
+    transition:transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s ease;
+  }
+  .food-card:hover{ transform:translateY(-6px) scale(1.015); box-shadow:0 18px 40px rgba(0,0,0,.4); border-color:rgba(214,40,40,.4); }
+  .food-badge{
+    position:absolute; top:14px; right:14px; background:var(--yellow); color:var(--dark); font-weight:800; font-size:10.5px;
+    padding:4px 10px; border-radius:999px; letter-spacing:.02em;
+  }
+  .food-icon-row{ display:flex; align-items:center; gap:12px; }
+  .food-icon{
+    width:44px; height:44px; border-radius:12px; background:rgba(255,255,255,.05); border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; font-size:21px; flex-shrink:0;
+  }
+  .food-card h4{ color:#fff; font-family:var(--font-head); font-size:16.5px; font-weight:700; }
+  .food-desc{ color:rgba(255,255,255,.5); font-size:12.5px; line-height:1.5; min-height:32px; }
+  .food-sizes{ display:flex; flex-direction:column; gap:5px; border-top:1px dashed var(--line); padding-top:10px; }
+  .food-size-row{ display:flex; justify-content:space-between; font-size:12.5px; }
+  .food-size-row span{ color:rgba(255,255,255,.55); }
+  .food-size-row b{ color:#fff; font-family:var(--font-head); font-weight:700; }
+  .food-btns{ display:flex; gap:8px; flex-wrap:wrap; margin-top:auto; padding-top:4px; }
+  .size-btn{
+    flex:1 1 auto; border:1.5px solid var(--red); color:var(--red); background:transparent;
+    border-radius:999px; padding:9px 12px; font-family:var(--font-head); font-size:12px; font-weight:700;
+    cursor:pointer; transition:background .25s var(--ease), color .25s var(--ease), transform .2s var(--ease);
+    white-space:nowrap;
+  }
+  .size-btn:hover{ background:var(--red); color:#fff; transform:translateY(-2px); }
+  .size-btn.added{ background:#25D366; border-color:#25D366; color:#fff; transform:scale(1.06); }
+
+  /* ===== FLOATING CART ===== */
+  .cart-fab{
+    position:fixed; left:20px; bottom:88px; z-index:260;
+    width:60px; height:60px; border-radius:50%; background:var(--red); color:#fff;
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+    box-shadow:0 12px 28px rgba(214,40,40,.5); border:none; transition:transform .3s var(--ease);
+  }
+  .cart-fab:hover{ transform:translateY(-4px) scale(1.05); }
+  .cart-fab .cart-badge{
+    position:absolute; top:-4px; right:-4px; background:var(--yellow); color:var(--dark);
+    font-family:var(--font-head); font-weight:800; font-size:11.5px; min-width:22px; height:22px; border-radius:11px;
+    display:flex; align-items:center; justify-content:center; padding:0 5px; border:2px solid var(--dark);
+  }
+  @media (max-width:760px){ .cart-fab{ bottom:104px; left:14px; width:52px; height:52px; } }
+
+  .cart-scrim{ position:fixed; inset:0; background:rgba(0,0,0,.6); opacity:0; pointer-events:none; transition:opacity .3s ease; z-index:480; }
+  .cart-scrim.open{ opacity:1; pointer-events:auto; }
+  .cart-panel{
+    position:fixed; right:0; top:0; height:100%; width:min(92vw,420px); background:var(--dark-soft);
+    z-index:490; display:flex; flex-direction:column; transform:translateX(100%); transition:transform .4s var(--ease);
+    border-left:1px solid var(--line);
+  }
+  .cart-panel.open{ transform:translateX(0); }
+  .cart-head{ display:flex; align-items:center; justify-content:space-between; padding:22px 22px 16px; border-bottom:1px solid var(--line); }
+  .cart-head h3{ color:#fff; font-family:var(--font-head); font-size:19px; }
+  .cart-close{ background:rgba(255,255,255,.08); border:none; color:#fff; width:36px; height:36px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .2s ease; }
+  .cart-close:hover{ background:rgba(255,255,255,.18); }
+  .cart-items{ flex:1; overflow-y:auto; padding:14px 22px; display:flex; flex-direction:column; gap:12px; }
+  .cart-empty{ color:rgba(255,255,255,.4); text-align:center; padding:60px 20px; font-size:14px; }
+  .cart-item{ display:flex; align-items:center; justify-content:space-between; gap:10px; background:var(--dark); border:1px solid var(--line); border-radius:12px; padding:12px 14px; }
+  .cart-item-info b{ display:block; color:#fff; font-family:var(--font-head); font-size:13.5px; }
+  .cart-item-info span{ color:rgba(255,255,255,.5); font-size:11.5px; }
+  .cart-item-right{ display:flex; align-items:center; gap:10px; }
+  .cart-qty{ display:flex; align-items:center; gap:6px; }
+  .cart-qty button{ width:24px; height:24px; border-radius:6px; border:1px solid var(--line); background:rgba(255,255,255,.06); color:#fff; cursor:pointer; font-size:14px; line-height:1; }
+  .cart-qty button:hover{ background:rgba(255,255,255,.14); }
+  .cart-qty span{ color:#fff; font-family:var(--font-head); font-weight:700; font-size:13px; min-width:16px; text-align:center; }
+  .cart-item-price{ color:var(--yellow); font-family:var(--font-head); font-weight:700; font-size:13.5px; min-width:64px; text-align:right; }
+  .cart-remove{ background:none; border:none; color:rgba(255,255,255,.35); cursor:pointer; padding:2px; }
+  .cart-remove:hover{ color:var(--red); }
+  .cart-footer{ padding:18px 22px 24px; border-top:1px solid var(--line); }
+  .cart-total-row{ display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
+  .cart-total-row span{ color:rgba(255,255,255,.6); font-size:13.5px; }
+  .cart-total-row b{ color:#fff; font-family:var(--font-head); font-size:24px; }
+  .cart-wa-btn{
+    width:100%; background:#25D366; color:#08331b; border:none; border-radius:12px; padding:15px 16px;
+    font-family:var(--font-head); font-weight:800; font-size:14.5px; cursor:pointer; display:flex; align-items:center;
+    justify-content:center; gap:9px; transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .cart-wa-btn:hover{ transform:translateY(-2px); box-shadow:0 12px 26px rgba(37,211,102,.4); }
+  .cart-wa-btn:disabled{ opacity:.4; cursor:not-allowed; transform:none; box-shadow:none; }
+
 </style>
 </head>
 <body>
@@ -812,416 +936,45 @@
   </div>
 </section>
 
-<!-- ===== MENU ===== -->
-<section class="menu" id="menu">
+<!-- ===== MENU & DEALS (ACCORDION) ===== -->
+<section class="menu2" id="menu">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">The catalogue</span>
-      <h2>Our menu</h2>
-      <p>Signature pizzas, appetizers, burgers and more — every item is one tap away from your door.</p>
+      <span class="eyebrow">Order in one tap</span>
+      <h2>Menu &amp; Deals</h2>
+      <p>Pick a category, choose a size, add to cart, and send your order straight to WhatsApp.</p>
     </div>
-    <div class="filter-tabs reveal">
-      <button class="tab active" data-filter="all">All</button>
-      <button class="tab" data-filter="pizza">Pizzas</button>
-      <button class="tab" data-filter="pasta">Pasta</button>
-      <button class="tab" data-filter="appetizers">Appetizers</button>
-      <button class="tab" data-filter="burgers">Burgers &amp; Sides</button>
-      <button class="tab" data-filter="kidco">Kidco Club</button>
-      <button class="tab" data-filter="beverages">Beverages</button>
-    </div>
-    <div class="menu-grid" id="menuGrid">
-
-      <div class="m-card" data-cat="pizza">
-        <span class="badge-pop">Most Popular</span>
-        <span class="m-stars">★ 4.8</span>
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Supreme_pizza.jpg?width=800" alt="Somewhat Special pizza" loading="lazy" decoding="async" width="800" height="600"></div>
-        <div class="m-body">
-          <h3>Somewhat Special</h3>
-          <p>Pizza O'Clock Special, Bonfire, Click On, Super Supreme, Pizza Delight, Supreme Le'Bistro, Karara Tikka</p>
-          <div class="price-table"><div class="pt-row"><span>Small</span><b>Rs. 570</b></div><div class="pt-row"><span>Medium</span><b>Rs. 1300</b></div><div class="pt-row"><span>Large</span><b>Rs. 1740</b></div></div>
-          <p class="pg-note">+Rs. 70 extra for thin crust</p>
-          <button class="order-btn js-wa-order" data-item="Somewhat Special Pizza" data-price="Rs. 570 (Small) / Rs. 1300 (Medium) / Rs. 1740 (Large)">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>
-            Order Now
-          </button>
-        </div>
-      </div>
-
-      <div class="m-card" data-cat="pizza">
-        <span class="m-stars">★ 4.6</span>
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Slices_of_thin-crust_New_York_style_pizza.jpg?width=800" alt="Somewhat Traditional pizza" loading="lazy" decoding="async" width="800" height="600"></div>
-        <div class="m-body">
-          <h3>Somewhat Traditional</h3>
-          <p>Chicken Supreme, Veggie Lover, Hot n Spice, Chicken Tikka, Chicken Fajita, Fajita Sicilian, Euro, Cheese Lover</p>
-          <div class="price-table"><div class="pt-row"><span>Small</span><b>Rs. 550</b></div><div class="pt-row"><span>Medium</span><b>Rs. 1250</b></div><div class="pt-row"><span>Large</span><b>Rs. 1690</b></div></div>
-          <p class="pg-note">+Rs. 70 extra for thin crust</p>
-          <button class="order-btn js-wa-order" data-item="Somewhat Traditional Pizza" data-price="Rs. 550 (Small) / Rs. 1250 (Medium) / Rs. 1690 (Large)">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>
-            Order Now
-          </button>
-        </div>
-      </div>
-
-      <div class="m-card" data-cat="pizza">
-        <span class="m-stars">★ 4.7</span>
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Indian_Chicken_Seekh_Kebab.jpg?width=800" alt="Malai Boti pizza" loading="lazy" decoding="async" width="800" height="600"></div>
-        <div class="m-body">
-          <h3>Malai Boti</h3>
-          <p>Creamy chicken malai boti pizza</p>
-          <div class="price-table"><div class="pt-row"><span>Round · Medium</span><b>Rs. 1490</b></div><div class="pt-row"><span>Round · Large</span><b>Rs. 2290</b></div><div class="pt-row"><span>Square · Medium</span><b>Rs. 1870</b></div><div class="pt-row"><span>Square · Large</span><b>Rs. 2570</b></div></div>
-          <button class="order-btn js-wa-order" data-item="Malai Boti Pizza" data-price="Rs. 1490–2570 depending on size">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>
-            Order Now
-          </button>
-        </div>
-      </div>
-
-      <div class="m-card" data-cat="pizza">
-        <span class="m-stars">★ 4.6</span>
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Supreme_pizza.jpg?width=800" alt="Behari Kebab pizza" loading="lazy" decoding="async" width="800" height="600"></div>
-        <div class="m-body">
-          <h3>Behari Kebab</h3>
-          <p>Spiced behari kebab pizza</p>
-          <div class="price-table"><div class="pt-row"><span>Round · Medium</span><b>Rs. 1490</b></div><div class="pt-row"><span>Round · Large</span><b>Rs. 2290</b></div><div class="pt-row"><span>Square · Medium</span><b>Rs. 1870</b></div><div class="pt-row"><span>Square · Large</span><b>Rs. 2570</b></div></div>
-          <button class="order-btn js-wa-order" data-item="Behari Kebab Pizza" data-price="Rs. 1490–2570 depending on size">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>
-            Order Now
-          </button>
-        </div>
-      </div>
-
-      <div class="m-card" data-cat="pizza">
-        <span class="m-stars">★ 4.9</span>
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Cheese_stuffed_crust.jpg?width=800" alt="Stuffed Crust pizza" loading="lazy" decoding="async" width="800" height="600"></div>
-        <div class="m-body">
-          <h3>Stuffed Crust</h3>
-          <p>Kebab Stuffer, Cheese Stuffer, Chicken n Cheese</p>
-          <div class="price-table"><div class="pt-row"><span>Round · Medium</span><b>Rs. 1490</b></div><div class="pt-row"><span>Round · Large</span><b>Rs. 2290</b></div><div class="pt-row"><span>Square · Medium</span><b>Rs. 1870</b></div><div class="pt-row"><span>Square · Large</span><b>Rs. 2570</b></div></div>
-          <button class="order-btn js-wa-order" data-item="Stuffed Crust Pizza" data-price="Rs. 1490–2570 depending on size">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>
-            Order Now
-          </button>
-        </div>
-      </div>
-
-      <div class="m-card" data-cat="pizza">
-        <span class="m-stars">★ 4.5</span>
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Cheese_stuffed_crust.jpg?width=800" alt="Crown Crust pizza" loading="lazy" decoding="async" width="800" height="600"></div>
-        <div class="m-body">
-          <h3>Crown Crust</h3>
-          <p>Cheese-crowned signature crust</p>
-          <div class="price-table"><div class="pt-row"><span>Large only</span><b>Rs. 1990</b></div></div>
-          <button class="order-btn js-wa-order" data-item="Crown Crust Pizza (Large)" data-price="Rs. 1990">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>
-            Order Now
-          </button>
-        </div>
-      </div>
-
-      <div class="m-card" data-cat="pizza">
-        <span class="badge-pop">Signature</span>
-        <span class="m-stars">★ 4.9</span>
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Sfincione_palermitano.jpg?width=800" alt="Fun Square pizza" loading="lazy" decoding="async" width="800" height="600"></div>
-        <div class="m-body">
-          <h3>Fun Square</h3>
-          <p>The Square Pizza Co. — a playful twist on traditional round pizzas</p>
-          <div class="price-table"><div class="pt-row"><span>Small</span><b>Rs. 700</b></div><div class="pt-row"><span>Medium</span><b>Rs. 1540</b></div><div class="pt-row"><span>Large</span><b>Rs. 2290</b></div></div>
-          <button class="order-btn js-wa-order" data-item="Fun Square Pizza" data-price="Rs. 700 (Small) / Rs. 1540 (Medium) / Rs. 2290 (Large)">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>
-            Order Now
-          </button>
-        </div>
-      </div>
-
-      <div class="m-card" data-cat="pizza">
-        <span class="m-stars">★ 4.4</span>
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Calzone_Tradition_+_poivrons.JPG?width=800" alt="Tempting Calzone" loading="lazy" decoding="async" width="800" height="600"></div>
-        <div class="m-body">
-          <h3>Tempting Calzone</h3>
-          <p>Magnetic Flavor (9") · Sizzling Flavor (9")</p>
-          <div class="m-foot"><span class="m-cat-tag">Pizza</span><span class="m-price">Rs. 1090</span></div>
-          <button class="order-btn js-wa-order" data-item="Tempting Calzone" data-price="Rs. 1090">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>
-            Order Now
-          </button>
-        </div>
-      </div>
-
-      <div class="m-card" data-cat="pasta">
-        <span class="m-stars">★ 4.6</span>
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Chicken_fettuccine_alfredo.JPG?width=800" alt="Creamy pasta" loading="lazy" decoding="async" width="800" height="600"></div>
-        <div class="m-body">
-          <h3>Pasta</h3>
-          <p>Pizza O'Clock Special · Flaming Pasta · Crunchy Pasta · Kebabish Pasta</p>
-          <div class="price-table small"><div class="pt-row"><span>Half</span><b>Rs. 550</b></div><div class="pt-row"><span>Full</span><b>Rs. 900</b></div></div>
-          <button class="order-btn js-wa-order" data-item="Pasta" data-price="Rs. 550 (Half) / Rs. 900 (Full)">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>
-            Order Now
-          </button>
-        </div>
-      </div>
-
-      <div class="m-card" data-cat="appetizers">
-        <span class="m-stars">★ 4.5</span>
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Oven-baked_mozzarella_sticks.JPG?width=800" alt="Cheesy Sticks" loading="lazy" decoding="async" width="800" height="600"></div>
-        <div class="m-body">
-          <h3>Cheesy Sticks</h3>
-          <p>4 pieces of cheese &amp; white sauce stuffed bread sticks, served with dip sauce.</p>
-          <div class="m-foot"><span class="m-cat-tag">Appetizers</span><span class="m-price">Rs. 550</span></div>
-          <button class="order-btn js-wa-order" data-item="Cheesy Sticks" data-price="Rs. 550">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>
-            Order Now
-          </button>
-        </div>
-      </div>
-
-      <div class="m-card" data-cat="appetizers">
-        <span class="m-stars">★ 4.6</span>
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Indian_Chicken_Seekh_Kebab.jpg?width=800" alt="Kabab Sticks" loading="lazy" decoding="async" width="800" height="600"></div>
-        <div class="m-body">
-          <h3>Kabab Sticks</h3>
-          <p>4 pieces of white sauce loaded kebab stuffed bread sticks, served with dip sauce.</p>
-          <div class="m-foot"><span class="m-cat-tag">Appetizers</span><span class="m-price">Rs. 570</span></div>
-          <button class="order-btn js-wa-order" data-item="Kabab Sticks" data-price="Rs. 570">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>
-            Order Now
-          </button>
-        </div>
-      </div>
-
-      <div class="m-card" data-cat="appetizers">
-        <span class="m-stars">★ 4.7</span>
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Homemade_buffalo_wings.jpg?width=800" alt="Oven Baked Wings" loading="lazy" decoding="async" width="800" height="600"></div>
-        <div class="m-body">
-          <h3>Oven Baked Wings</h3>
-          <p>Spicy &amp; juicy wings, or honey wings.</p>
-          <div class="price-table small"><div class="pt-row"><span>Spicy · 12 pcs</span><b>Rs. 850</b></div><div class="pt-row"><span>Spicy · 6 pcs</span><b>Rs. 480</b></div><div class="pt-row"><span>Honey · 12 pcs</span><b>Rs. 860</b></div><div class="pt-row"><span>Honey · 6 pcs</span><b>Rs. 440</b></div></div>
-          <button class="order-btn js-wa-order" data-item="Oven Baked Wings" data-price="Rs. 440–860 depending on flavor/pieces">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>
-            Order Now
-          </button>
-        </div>
-      </div>
-
-      <div class="m-card" data-cat="appetizers">
-        <span class="m-stars">★ 4.5</span>
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Paratha_roll.jpg?width=800" alt="Oven Baked Rolls" loading="lazy" decoding="async" width="800" height="600"></div>
-        <div class="m-body">
-          <h3>Oven Baked Rolls</h3>
-          <p>Four flavours — Tempeeli, Behari, Peri Peri, Malai Boti — served with mayo dip sauce.</p>
-          <div class="m-foot"><span class="m-cat-tag">Appetizers</span><span class="m-price">Rs. 700</span></div>
-          <button class="order-btn js-wa-order" data-item="Oven Baked Rolls" data-price="Rs. 700">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>
-            Order Now
-          </button>
-        </div>
-      </div>
-
-      <div class="m-card" data-cat="appetizers">
-        <span class="m-stars">★ 4.6</span>
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Homemade_buffalo_wings.jpg?width=800" alt="Platter" loading="lazy" decoding="async" width="800" height="600"></div>
-        <div class="m-body">
-          <h3>Platter</h3>
-          <p>4 pieces of spring rolls served with 6 juicy oven baked wings &amp; mayo dip sauce.</p>
-          <div class="price-table small"><div class="pt-row"><span>Malai Boti</span><b>Rs. 1180</b></div><div class="pt-row"><span>Pizza O'Clock Special</span><b>Rs. 999</b></div></div>
-          <button class="order-btn js-wa-order" data-item="Platter" data-price="Rs. 999–1180 depending on flavor">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>
-            Order Now
-          </button>
-        </div>
-      </div>
-
-      <div class="m-card" data-cat="burgers">
-        <span class="m-stars">★ 4.5</span>
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Popeyes_chicken_sandwich.jpg?width=800" alt="Burgers" loading="lazy" decoding="async" width="800" height="600"></div>
-        <div class="m-body">
-          <h3>Burgers</h3>
-          <p>Patty · Cheese Patty · Zinger · Cheese Zinger</p>
-          <div class="price-table small"><div class="pt-row"><span>Patty Burger</span><b>Rs. 350</b></div><div class="pt-row"><span>Cheese Patty Burger</span><b>Rs. 400</b></div><div class="pt-row"><span>Zinger Burger</span><b>Rs. 440</b></div><div class="pt-row"><span>Cheese Zinger Burger</span><b>Rs. 490</b></div></div>
-          <button class="order-btn js-wa-order" data-item="Burger" data-price="Rs. 350–490 depending on type">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>
-            Order Now
-          </button>
-        </div>
-      </div>
-
-      <div class="m-card" data-cat="burgers">
-        <span class="m-stars">★ 4.4</span>
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Tortamex.jpg?width=800" alt="Mexican Sandwich" loading="lazy" decoding="async" width="800" height="600"></div>
-        <div class="m-body">
-          <h3>Mexican Sandwich</h3>
-          <p>A bun baked with chicken, veggies &amp; cheese, with a twist of mayo mustard sauce.</p>
-          <div class="m-foot"><span class="m-cat-tag">Burgers</span><span class="m-price">Rs. 790</span></div>
-          <button class="order-btn js-wa-order" data-item="Mexican Sandwich" data-price="Rs. 790">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>
-            Order Now
-          </button>
-        </div>
-      </div>
-
-      <div class="m-card" data-cat="burgers">
-        <span class="m-stars">★ 4.7</span>
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Chicken_Nuggets.jpg?width=800" alt="Nuggets" loading="lazy" decoding="async" width="800" height="600"></div>
-        <div class="m-body">
-          <h3>Nuggets</h3>
-          <p>Crispy golden chicken nuggets.</p>
-          <div class="price-table small"><div class="pt-row"><span>12 pcs</span><b>Rs. 570</b></div><div class="pt-row"><span>6 pcs</span><b>Rs. 330</b></div></div>
-          <button class="order-btn js-wa-order" data-item="Nuggets" data-price="Rs. 330 (6 pcs) / Rs. 570 (12 pcs)">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>
-            Order Now
-          </button>
-        </div>
-      </div>
-
-      <div class="m-card" data-cat="burgers">
-        <span class="m-stars">★ 4.3</span>
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/French_Fries.JPG?width=800" alt="French Fries" loading="lazy" decoding="async" width="800" height="600"></div>
-        <div class="m-body">
-          <h3>French Fries</h3>
-          <p>Classic crispy fries.</p>
-          <div class="price-table small"><div class="pt-row"><span>Family</span><b>Rs. 550</b></div><div class="pt-row"><span>Single</span><b>Rs. 330</b></div></div>
-          <button class="order-btn js-wa-order" data-item="French Fries" data-price="Rs. 330 (Single) / Rs. 550 (Family)">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>
-            Order Now
-          </button>
-        </div>
-      </div>
-
-      <div class="m-card" data-cat="burgers">
-        <span class="m-stars">★ 4.6</span>
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Loaded_fries.jpg?width=800" alt="Loaded Fries" loading="lazy" decoding="async" width="800" height="600"></div>
-        <div class="m-body">
-          <h3>Loaded Fries</h3>
-          <p>Crispy fries piled with melted cheese and house sauce.</p>
-          <div class="m-foot"><span class="m-cat-tag">Burgers</span><span class="m-price">Rs. 650</span></div>
-          <button class="order-btn js-wa-order" data-item="Loaded Fries" data-price="Rs. 650">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>
-            Order Now
-          </button>
-        </div>
-      </div>
-
-      <div class="m-card" data-cat="kidco">
-        <span class="m-stars">★ 4.8</span>
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Chicken_Nuggets.jpg?width=800" alt="Kidco Deal 1" loading="lazy" decoding="async" width="800" height="600"></div>
-        <div class="m-body">
-          <h3>Kidco Deal 1</h3>
-          <p>Kidco Pizza + Nuggets + Fries + Juice.</p>
-          <div class="m-foot"><span class="m-cat-tag">Kidco</span><span class="m-price">Rs. 599</span></div>
-          <button class="order-btn js-wa-order" data-item="Kidco Deal 1" data-price="Rs. 599">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>
-            Order Now
-          </button>
-        </div>
-      </div>
-
-      <div class="m-card" data-cat="kidco">
-        <span class="m-stars">★ 4.7</span>
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Chicken_Nuggets.jpg?width=800" alt="Kidco Deal 2" loading="lazy" decoding="async" width="800" height="600"></div>
-        <div class="m-body">
-          <h3>Kidco Deal 2</h3>
-          <p>Kidco Burger + Nuggets + Fries + Juice.</p>
-          <div class="m-foot"><span class="m-cat-tag">Kidco</span><span class="m-price">Rs. 599</span></div>
-          <button class="order-btn js-wa-order" data-item="Kidco Deal 2" data-price="Rs. 599">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>
-            Order Now
-          </button>
-        </div>
-      </div>
-
-      <div class="m-card" data-cat="beverages">
-        <span class="m-stars">★ 4.5</span>
-        <div class="m-thumb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Soft_drink_shelf.JPG?width=800" alt="Beverages" loading="lazy" decoding="async" width="800" height="600"></div>
-        <div class="m-body">
-          <h3>Beverages</h3>
-          <p>500 ML Drink · Tin Pack · 1 Ltr Drink · 1.5 Ltr Drink · Mineral Water (S) · Mineral Water (L)</p>
-          <div class="price-table small"><div class="pt-row"><span>500 ML Drink</span><b>Rs. 130</b></div><div class="pt-row"><span>Tin Pack</span><b>Rs. 130</b></div><div class="pt-row"><span>1 Ltr Drink</span><b>Rs. 210</b></div><div class="pt-row"><span>1.5 Ltr Drink</span><b>Rs. 240</b></div><div class="pt-row"><span>Mineral Water (S)</span><b>Rs. 90</b></div><div class="pt-row"><span>Mineral Water (L)</span><b>Rs. 120</b></div></div>
-          <button class="order-btn js-wa-order" data-item="Beverage" data-price="Rs. 90–240 depending on type/size">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>
-            Order Now
-          </button>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="extras-note reveal">
-      <div class="extras-col">
-        <h4>Sauces</h4>
-        <div class="extras-row"><span>Dip Sauce</span><b>Rs. 110</b></div>
-        <div class="extras-row"><span>Mayo Mustard</span><b>Rs. 110</b></div>
-        <div class="extras-row"><span>Thousand Island</span><b>Rs. 110</b></div>
-      </div>
-      <div class="extras-col">
-        <h4>Extra Topping</h4>
-        <div class="extras-row"><span>Chicken — Small / Medium / Large</span><b>Rs. 110 / 150 / 210</b></div>
-        <div class="extras-row"><span>Cheese — Small / Medium / Large</span><b>Rs. 110 / 150 / 210</b></div>
-      </div>
-      <p class="extras-fine">* Disposable glass charges are included. Printing errors are acceptable.</p>
-    </div>
+    <div id="deals" style="position:relative; top:-90px;"></div>
+    <div class="accordion" id="accordion"></div>
   </div>
 </section>
 
-<!-- ===== DEALS ===== -->
-<section class="deals" id="deals">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow" style="background:rgba(245,194,66,.12); border-color:rgba(245,194,66,.3); color:var(--yellow);">Value packs</span>
-      <h2>Deals &amp; offers</h2>
-      <p>Built for every table size — solo cravings to full birthday parties.</p>
-    </div>
+<!-- ===== FLOATING CART ===== -->
+<button class="cart-fab" id="cartFab" aria-label="Open cart">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 4H5L6.5 15.5C6.6 16.4 7.4 17 8.3 17H18C18.8 17 19.5 16.5 19.7 15.7L21.3 8.5C21.5 7.6 20.8 6.7 19.9 6.7H6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="20" r="1.4" fill="#fff"/><circle cx="18" cy="20" r="1.4" fill="#fff"/></svg>
+  <span class="cart-badge" id="cartBadge" style="display:none;">0</span>
+</button>
 
-    <h3 class="deals-subhead">Family &amp; Party Deals</h3>
-    <div class="deals-grid" id="familyDeals">
-      <div class="d-card"><span class="deal-tag">Tuesday Night Only</span><h3>Mega Deal</h3><p>3 Large Special Pizzas + 2 Drinks (1.5 Ltr)</p><div class="deal-price">Rs. 5700</div>
-        <button class="deal-order js-wa-order" data-item="Mega Deal" data-price="Rs. 5700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>Order Now</button>
-      </div>
-      <div class="d-card"><h3>Royal Deal</h3><p>2 Large Special Pizzas + 12 pcs Wings + 1 Drink (1.5 Ltr)</p><div class="deal-price">Rs. 4500</div>
-        <button class="deal-order js-wa-order" data-item="Royal Deal" data-price="Rs. 4500"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>Order Now</button>
-      </div>
-      <div class="d-card"><h3>Family Ties</h3><p>1 Large + 1 Medium Square Pizza + 1 Small Pasta + 2 Drinks (1.5 Ltr)</p><div class="deal-price">Rs. 5600</div>
-        <button class="deal-order js-wa-order" data-item="Family Ties Deal" data-price="Rs. 5600"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>Order Now</button>
-      </div>
-      <div class="d-card"><h3>Birthday Bash</h3><p>3 Square Pizzas + 12 pcs Wings + 2 Drinks (1.5 Ltr)</p><div class="deal-price">Rs. 8290</div>
-        <button class="deal-order js-wa-order" data-item="Birthday Bash Deal" data-price="Rs. 8290"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>Order Now</button>
-      </div>
-    </div>
-
-    <h3 class="deals-subhead midnight"><span class="dot-live"></span> Crazy Midnight Madness<span class="deals-subnote">11:00 PM to close</span></h3>
-    <div class="deals-grid deals-grid-5" id="midnightDeals">
-      <div class="d-card"><h3>Deal 1</h3><p>1 Small Pizza + 1 Drink (500 ml)</p><div class="deal-price">Rs. 690</div>
-        <button class="deal-order js-wa-order" data-item="Midnight Deal 1" data-price="Rs. 690"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>Order Now</button>
-      </div>
-      <div class="d-card"><h3>Deal 2</h3><p>1 Medium Special Pizza + 1 Drink (500 ml)</p><div class="deal-price">Rs. 1390</div>
-        <button class="deal-order js-wa-order" data-item="Midnight Deal 2" data-price="Rs. 1390"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>Order Now</button>
-      </div>
-      <div class="d-card"><h3>Deal 3</h3><p>2 Small Pizzas + 1 Pasta + 1 Drink (500 ml)</p><div class="deal-price">Rs. 1690</div>
-        <button class="deal-order js-wa-order" data-item="Midnight Deal 3" data-price="Rs. 1690"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>Order Now</button>
-      </div>
-      <div class="d-card"><h3>Deal 4</h3><p>1 Large Special Pizza + 1 Drink (1.5 Ltr)</p><div class="deal-price">Rs. 1890</div>
-        <button class="deal-order js-wa-order" data-item="Midnight Deal 4" data-price="Rs. 1890"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>Order Now</button>
-      </div>
-      <div class="d-card"><h3>Deal 5</h3><p>1 Large Pizza + 1 Pasta + 1 Drink (1.5 Ltr)</p><div class="deal-price">Rs. 2690</div>
-        <button class="deal-order js-wa-order" data-item="Midnight Deal 5" data-price="Rs. 2690"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>Order Now</button>
-      </div>
-      <div class="d-card"><h3>Deal 6</h3><p>2 Large Special Pizzas + 1 Drink (1.5 Ltr)</p><div class="deal-price">Rs. 3700</div>
-        <button class="deal-order js-wa-order" data-item="Midnight Deal 6" data-price="Rs. 3700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>Order Now</button>
-      </div>
-      <div class="d-card"><h3>Square Deal</h3><p>1 Square Pizza + 1 Drink (1.5 Ltr)</p><div class="deal-price">Rs. 2590</div>
-        <button class="deal-order js-wa-order" data-item="Square Deal" data-price="Rs. 2590"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>Order Now</button>
-      </div>
-      <div class="d-card"><h3>Chaska Deal</h3><p>1 Pasta + 6 pcs Wings + 1 Drink (500 ml)</p><div class="deal-price">Rs. 1200</div>
-        <button class="deal-order js-wa-order" data-item="Chaska Deal" data-price="Rs. 1200"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>Order Now</button>
-      </div>
-      <div class="d-card"><h3>Zinger Deal 1</h3><p>1 Zinger Burger + 1 Fries + 1 Drink (500 ml)</p><div class="deal-price">Rs. 900</div>
-        <button class="deal-order js-wa-order" data-item="Zinger Deal 1" data-price="Rs. 900"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>Order Now</button>
-      </div>
-      <div class="d-card"><h3>Zinger Deal 2</h3><p>3 Zinger Burgers + 1 Fries + 1 Drink (1.5 Ltr)</p><div class="deal-price">Rs. 1700</div>
-        <button class="deal-order js-wa-order" data-item="Zinger Deal 2" data-price="Rs. 1700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>Order Now</button>
-      </div>
-    </div>
+<div class="cart-scrim" id="cartScrim"></div>
+<aside class="cart-panel" id="cartPanel" aria-label="Your cart">
+  <div class="cart-head">
+    <h3>Your Cart</h3>
+    <button class="cart-close" id="cartCloseBtn" aria-label="Close cart">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 5L19 19M19 5L5 19" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>
+    </button>
   </div>
-</section>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty">Your cart is empty.<br>Add items from the menu to get started.</div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total-row"><span>Total</span><b id="cartTotal">Rs. 0</b></div>
+    <button class="cart-wa-btn" id="cartWaBtn" disabled>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.76 2.46 15.42 3.28 16.86L2 22L7.31 20.75C8.7 21.5 10.3 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#fff"/></svg>
+      Order via WhatsApp
+    </button>
+  </div>
+</aside>
+
 
 <!-- ===== GALLERY ===== -->
 <section class="gallery" id="gallery">
@@ -1501,6 +1254,283 @@
     });
   }
   window.addEventListener('scroll', updateTabbar, { passive:true });
+</script>
+
+
+<script>
+  // ===== MENU & DEALS DATA =====
+  const MENU_DATA = [
+    {
+      key: 'pizza', emoji: '🍕', name: 'Pizza', note: '8 items',
+      items: [
+        { name:"Somewhat Special", desc:"Pizza O'Clock Special, Bonfire, Click On, Super Supreme, Karara Tikka", badge:"Most Popular",
+          sizes:[{label:"Small",price:570},{label:"Medium",price:1300},{label:"Large",price:1740}] },
+        { name:"Somewhat Traditional", desc:"Chicken Supreme, Veggie Lover, Chicken Tikka, Cheese Lover",
+          sizes:[{label:"Small",price:550},{label:"Medium",price:1250},{label:"Large",price:1690}] },
+        { name:"Fun Square", desc:"The Square Pizza Co. — a playful twist on round pizza", badge:"Signature",
+          sizes:[{label:"Small",price:700},{label:"Medium",price:1540},{label:"Large",price:2290}] },
+        { name:"Malai Boti", desc:"Creamy chicken malai boti pizza",
+          sizes:[{label:"Rnd Med",price:1490},{label:"Rnd Lrg",price:2290},{label:"Sq Med",price:1870},{label:"Sq Lrg",price:2570}] },
+        { name:"Behari Kebab", desc:"Spiced behari kebab pizza",
+          sizes:[{label:"Rnd Med",price:1490},{label:"Rnd Lrg",price:2290},{label:"Sq Med",price:1870},{label:"Sq Lrg",price:2570}] },
+        { name:"Stuffed Crust", desc:"Kebab Stuffer, Cheese Stuffer, Chicken n Cheese",
+          sizes:[{label:"Rnd Med",price:1490},{label:"Rnd Lrg",price:2290},{label:"Sq Med",price:1870},{label:"Sq Lrg",price:2570}] },
+        { name:"Crown Crust", desc:"Cheese-crowned signature crust (large only)",
+          sizes:[{label:"Large",price:1990}] },
+        { name:"Tempting Calzone", desc:"Magnetic Flavor (9\") · Sizzling Flavor (9\")",
+          sizes:[{label:"9 inch",price:1090}] },
+      ]
+    },
+    {
+      key: 'deals', emoji: '🎉', name: 'Deals', note: 'Family & Midnight offers',
+      items: [
+        { name:"Mega Deal", desc:"3 Large Special Pizzas + 2 Drinks (1.5 Ltr)", badge:"Tue Night Only", sizes:[{label:"Deal",price:5700}] },
+        { name:"Royal Deal", desc:"2 Large Special Pizzas + 12 pcs Wings + 1 Drink (1.5 Ltr)", sizes:[{label:"Deal",price:4500}] },
+        { name:"Family Ties", desc:"1 Large + 1 Medium Square Pizza + 1 Small Pasta + 2 Drinks", sizes:[{label:"Deal",price:5600}] },
+        { name:"Birthday Bash", desc:"3 Square Pizzas + 12 pcs Wings + 2 Drinks (1.5 Ltr)", sizes:[{label:"Deal",price:8290}] },
+        { name:"Midnight Deal 1", desc:"1 Small Pizza + 1 Drink (500 ml) · 11PM–close", sizes:[{label:"Deal",price:690}] },
+        { name:"Midnight Deal 4", desc:"1 Large Special Pizza + 1 Drink (1.5 Ltr) · 11PM–close", sizes:[{label:"Deal",price:1890}] },
+        { name:"Square Deal", desc:"1 Square Pizza + 1 Drink (1.5 Ltr) · 11PM–close", sizes:[{label:"Deal",price:2590}] },
+        { name:"Zinger Deal 2", desc:"3 Zinger Burgers + 1 Fries + 1 Drink (1.5 Ltr) · 11PM–close", sizes:[{label:"Deal",price:1700}] },
+      ]
+    },
+    {
+      key: 'burgers', emoji: '🍔', name: 'Burgers', note: '5 items',
+      items: [
+        { name:"Patty Burger", desc:"Classic beef patty burger", sizes:[{label:"Regular",price:350}] },
+        { name:"Cheese Patty Burger", desc:"Patty burger loaded with cheese", sizes:[{label:"Regular",price:400}] },
+        { name:"Zinger Burger", desc:"Crispy fried chicken zinger", badge:"Popular", sizes:[{label:"Regular",price:440}] },
+        { name:"Cheese Zinger Burger", desc:"Zinger burger loaded with cheese", sizes:[{label:"Regular",price:490}] },
+        { name:"Mexican Sandwich", desc:"Chicken, veggies & cheese with mayo mustard sauce", sizes:[{label:"Regular",price:790}] },
+        { name:"Nuggets", desc:"Crispy golden chicken nuggets", sizes:[{label:"6 pcs",price:330},{label:"12 pcs",price:570}] },
+        { name:"French Fries", desc:"Classic crispy fries", sizes:[{label:"Single",price:330},{label:"Family",price:550}] },
+        { name:"Loaded Fries", desc:"Fries piled with melted cheese & house sauce", sizes:[{label:"Regular",price:650}] },
+      ]
+    },
+    {
+      key: 'wraps', emoji: '🌯', name: 'Wraps', note: '4 items',
+      items: [
+        { name:"Zinger Wrap", desc:"Crispy chicken, lettuce & mayo in a soft roll", sizes:[{label:"Regular",price:380},{label:"Large",price:480}] },
+        { name:"Malai Boti Wrap", desc:"Creamy malai boti chicken wrap", badge:"Popular", sizes:[{label:"Regular",price:420},{label:"Large",price:520}] },
+        { name:"Behari Wrap", desc:"Spiced behari kebab wrap", sizes:[{label:"Regular",price:400},{label:"Large",price:500}] },
+        { name:"Fajita Wrap", desc:"Sizzling chicken fajita wrap", sizes:[{label:"Regular",price:390},{label:"Large",price:490}] },
+      ]
+    },
+    {
+      key: 'broast', emoji: '🍗', name: 'Broast', note: '4 items',
+      items: [
+        { name:"Broast 2 Pcs", desc:"Crispy fried chicken, 2 pieces", sizes:[{label:"2 Pcs",price:450}] },
+        { name:"Broast 4 Pcs", desc:"Crispy fried chicken, 4 pieces", badge:"Popular", sizes:[{label:"4 Pcs",price:850}] },
+        { name:"Broast Full (8 Pcs)", desc:"Whole crispy fried chicken, 8 pieces", sizes:[{label:"Full",price:1600}] },
+        { name:"Broast Deal", desc:"Broast Half + Fries + Drink (500 ml)", sizes:[{label:"Deal",price:950}] },
+      ]
+    },
+  ];
+
+  // ===== RENDER ACCORDION =====
+  const accordionEl = document.getElementById('accordion');
+  MENU_DATA.forEach((cat, ci) => {
+    const item = document.createElement('div');
+    item.className = 'acc-item';
+    item.id = 'acc-' + cat.key;
+
+    const cardsHtml = cat.items.map((food, fi) => {
+      const badge = food.badge ? `<span class="food-badge">${food.badge}</span>` : '';
+      const sizeRows = food.sizes.map(s => `<div class="food-size-row"><span>${s.label}</span><b>Rs. ${s.price}</b></div>`).join('');
+      const sizeBtns = food.sizes.map((s, si) => `<button class="size-btn" data-cat="${cat.key}" data-food="${fi}" data-size="${si}">+ ${s.label}</button>`).join('');
+      return `
+        <div class="food-card">
+          ${badge}
+          <div class="food-icon-row">
+            <div class="food-icon">${cat.emoji}</div>
+            <h4>${food.name}</h4>
+          </div>
+          <p class="food-desc">${food.desc}</p>
+          <div class="food-sizes">${sizeRows}</div>
+          <div class="food-btns">${sizeBtns}</div>
+        </div>`;
+    }).join('');
+
+    item.innerHTML = `
+      <button class="acc-head" data-key="${cat.key}">
+        <div class="acc-head-left">
+          <div class="acc-emoji">${cat.emoji}</div>
+          <div class="acc-title"><h3>${cat.name}</h3><span>${cat.note}</span></div>
+        </div>
+        <div class="acc-head-right">
+          <span class="acc-count">${cat.items.length} items</span>
+          <svg class="acc-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </button>
+      <div class="acc-body">
+        <div class="acc-body-inner">
+          <div class="food-grid">${cardsHtml}</div>
+        </div>
+      </div>`;
+    accordionEl.appendChild(item);
+  });
+
+  // ===== ACCORDION TOGGLE (smooth, one open at a time) =====
+  const accHeads = document.querySelectorAll('.acc-head');
+  accHeads.forEach(head => {
+    head.addEventListener('click', () => {
+      const item = head.closest('.acc-item');
+      const body = item.querySelector('.acc-body');
+      const isOpen = item.classList.contains('open');
+
+      document.querySelectorAll('.acc-item.open').forEach(openItem => {
+        if(openItem !== item){
+          openItem.classList.remove('open');
+          openItem.querySelector('.acc-body').style.maxHeight = '0px';
+        }
+      });
+
+      if(isOpen){
+        item.classList.remove('open');
+        body.style.maxHeight = '0px';
+      } else {
+        item.classList.add('open');
+        body.style.maxHeight = body.scrollHeight + 'px';
+        setTimeout(() => { item.scrollIntoView({ behavior:'smooth', block:'start' }); }, 120);
+      }
+    });
+  });
+
+  // Open the Pizza category by default
+  const defaultOpen = document.getElementById('acc-pizza');
+  if(defaultOpen){
+    defaultOpen.classList.add('open');
+    defaultOpen.querySelector('.acc-body').style.maxHeight = defaultOpen.querySelector('.acc-body').scrollHeight + 'px';
+  }
+
+  // Recalculate open accordion height on window resize (keeps animation accurate)
+  window.addEventListener('resize', () => {
+    document.querySelectorAll('.acc-item.open').forEach(openItem => {
+      openItem.querySelector('.acc-body').style.maxHeight = openItem.querySelector('.acc-body').scrollHeight + 'px';
+    });
+  });
+
+  // ===== CART STATE (simple in-memory JS state) =====
+  let cart = [];
+
+  function cartKey(catKey, foodIdx, sizeIdx){ return catKey + '-' + foodIdx + '-' + sizeIdx; }
+
+  function addToCart(catKey, foodIdx, sizeIdx, btn){
+    const cat = MENU_DATA.find(c => c.key === catKey);
+    const food = cat.items[foodIdx];
+    const size = food.sizes[sizeIdx];
+    const key = cartKey(catKey, foodIdx, sizeIdx);
+    const existing = cart.find(c => c.key === key);
+    if(existing){
+      existing.qty += 1;
+    } else {
+      cart.push({ key, name: food.name, sizeLabel: size.label, price: size.price, qty: 1 });
+    }
+    renderCart();
+    openCart();
+
+    // Active-state flash on the clicked size button
+    if(btn){
+      btn.classList.add('added');
+      const original = btn.textContent;
+      btn.textContent = '✓ Added';
+      setTimeout(() => { btn.classList.remove('added'); btn.textContent = original; }, 900);
+    }
+  }
+
+  accordionEl.addEventListener('click', (e) => {
+    const btn = e.target.closest('.size-btn');
+    if(!btn) return;
+    addToCart(btn.dataset.cat, Number(btn.dataset.food), Number(btn.dataset.size), btn);
+  });
+
+  function changeQty(key, delta){
+    const line = cart.find(c => c.key === key);
+    if(!line) return;
+    line.qty += delta;
+    if(line.qty <= 0){ cart = cart.filter(c => c.key !== key); }
+    renderCart();
+  }
+
+  function removeFromCart(key){
+    cart = cart.filter(c => c.key !== key);
+    renderCart();
+  }
+
+  function cartTotal(){
+    return cart.reduce((sum, c) => sum + c.price * c.qty, 0);
+  }
+
+  function renderCart(){
+    const itemsEl = document.getElementById('cartItems');
+    const totalEl = document.getElementById('cartTotal');
+    const badgeEl = document.getElementById('cartBadge');
+    const waBtn = document.getElementById('cartWaBtn');
+    const count = cart.reduce((n, c) => n + c.qty, 0);
+
+    if(cart.length === 0){
+      itemsEl.innerHTML = '<div class="cart-empty">Your cart is empty.<br>Add items from the menu to get started.</div>';
+      waBtn.disabled = true;
+    } else {
+      itemsEl.innerHTML = cart.map(c => `
+        <div class="cart-item">
+          <div class="cart-item-info"><b>${c.name}</b><span>${c.sizeLabel}</span></div>
+          <div class="cart-item-right">
+            <div class="cart-qty">
+              <button data-action="dec" data-key="${c.key}" aria-label="Decrease">−</button>
+              <span>${c.qty}</span>
+              <button data-action="inc" data-key="${c.key}" aria-label="Increase">+</button>
+            </div>
+            <div class="cart-item-price">Rs. ${c.price * c.qty}</div>
+            <button class="cart-remove" data-action="remove" data-key="${c.key}" aria-label="Remove">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 7H20M9 7V4H15V7M6 7L7 20H17L18 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>`).join('');
+      waBtn.disabled = false;
+    }
+
+    totalEl.textContent = 'Rs. ' + cartTotal();
+    if(count > 0){
+      badgeEl.style.display = 'flex';
+      badgeEl.textContent = count;
+    } else {
+      badgeEl.style.display = 'none';
+    }
+  }
+
+  document.getElementById('cartItems').addEventListener('click', (e) => {
+    const actionBtn = e.target.closest('[data-action]');
+    if(!actionBtn) return;
+    const key = actionBtn.dataset.key;
+    const action = actionBtn.dataset.action;
+    if(action === 'inc') changeQty(key, 1);
+    else if(action === 'dec') changeQty(key, -1);
+    else if(action === 'remove') removeFromCart(key);
+  });
+
+  // ===== CART PANEL OPEN/CLOSE =====
+  const cartPanel = document.getElementById('cartPanel');
+  const cartScrim = document.getElementById('cartScrim');
+  function openCart(){ cartPanel.classList.add('open'); cartScrim.classList.add('open'); }
+  function closeCart(){ cartPanel.classList.remove('open'); cartScrim.classList.remove('open'); }
+  document.getElementById('cartFab').addEventListener('click', openCart);
+  document.getElementById('cartCloseBtn').addEventListener('click', closeCart);
+  cartScrim.addEventListener('click', closeCart);
+
+  // ===== WHATSAPP CHECKOUT (reuses WHATSAPP_NUMBER / buildWaLink from main script) =====
+  document.getElementById('cartWaBtn').addEventListener('click', () => {
+    if(cart.length === 0) return;
+    let msg = "Hi Pizza O'Clock! I'd like to order:\n\n";
+    cart.forEach(c => {
+      msg += `🍽️ ${c.name} (${c.sizeLabel}) x${c.qty} — Rs. ${c.price * c.qty}\n`;
+    });
+    msg += `\nTotal: Rs. ${cartTotal()}\n\nPlease confirm my order. Thank you!`;
+    const link = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg);
+    window.open(link, '_blank', 'noopener');
+  });
+
+  renderCart();
 </script>
 
 </body>
