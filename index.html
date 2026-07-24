@@ -1431,14 +1431,7 @@
       }
     });
   });
-
-  // Open the Pizza category by default
-  const defaultOpen = document.getElementById('acc-pizza');
-  if(defaultOpen){
-    defaultOpen.classList.add('open');
-    defaultOpen.querySelector('.acc-body').style.maxHeight = defaultOpen.querySelector('.acc-body').scrollHeight + 'px';
-  }
-
+  
   // Recalculate open accordion height on window resize (keeps animation accurate)
   window.addEventListener('resize', () => {
     document.querySelectorAll('.acc-item.open').forEach(openItem => {
