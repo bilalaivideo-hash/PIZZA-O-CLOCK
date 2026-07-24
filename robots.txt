@@ -1,0 +1,8 @@
+# robots.txt for Pizza O'Clock (bilalaivideo-hash.github.io/PIZZA-O-CLOCK/)
+# Allow all search engines and AI crawlers to index the site.
+
+User-agent: *
+Allow: /
+
+# Point crawlers to the sitemap
+Sitemap: https://bilalaivideo-hash.github.io/PIZZA-O-CLOCK/sitemap.xml
