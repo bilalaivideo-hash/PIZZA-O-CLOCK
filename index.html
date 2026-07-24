@@ -1116,13 +1116,20 @@
 <script>
   // ===== WhatsApp ordering =====
   const WHATSAPP_NUMBER = '923062331111'; // Pizza O'Clock WhatsApp ordering number
-  function buildWaLink(item, price){
-    let msg = "Hi Pizza O'Clock! I'd like to order:\n";
-    msg += "🍕 " + item + "\n";
-    if(price){ msg += "Price: " + price + "\n"; }
-    msg += "Quantity: 1\n\nPlease confirm my order. Thank you!";
+ function buildWaLink(){
+
+    let msg = `🍕 *Pizza O'Clock*
+
+Hello Team,
+
+I hope you're doing well.
+
+I would like to place an order. Kindly assist me with the ordering process and share the available menu.
+
+Thank you! 😊`;
+
     return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg);
-  }
+}
   document.querySelectorAll('.js-wa-order').forEach(el => {
     const item = el.dataset.item || 'Order';
     const price = el.dataset.price || '';
